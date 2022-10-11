@@ -1,0 +1,61 @@
+Sequelize(mysql, mariaDB)
+
+	define : 테이블 정의 (INTEGER, TEXT 등등) (modelname, attributes, options)
+	모델 떨어뜨리기 : User.drop(); 전체 떨어뜨리기 : sequelize.drop();
+	create : 생성 : build + save 단일 단축명령 
+	save : 단일 업데이트
+	set : 한번에 여러 필드를 업데이트
+	destroy : 삭제
+	reload : 다시 로뜻
+	update :쿼리 업데이트
+	findAll : 전체 테이블을 읽어옴
+		attiributes 옵션 : 일부 속성만 선택
+		where 옵션 : 쿼리를 필터링하는데 사용
+			or, and : 그대로 뜻
+
+	limit, offset : 제한 / 페이지 매김 작업을 할 수 있음. 일반적으로 order 옵션과 함께 사용.
+	findByPK : 제공된 기본키를 사용하여 테이블에서 단일 항목만 가져옴 (정의에서 primary key설정한 것)
+	findOne : 첫 findOne 번째 항목을 얻는다.
+	sequelize.query('mysql' 고유 문법)
+	유효성 방향 : ASC, DESC, NULLS FIRST
+	col, fn, literal, random
+	eq - equal ( = )
+	ne - not equal ( <> )
+	lt - little ( < )
+	lte - little or equal ( <= )
+	gt - greater ( > )
+	gte - greater or equal ( >= )
+	인스턴스 값을 증가/감소
+	increment, decrement
+
+	DataTypes.STRING             // VARCHAR(255)
+	DataTypes.STRING(1234)       // VARCHAR(1234)
+	DataTypes.STRING.BINARY      // VARCHAR BINARY
+	DataTypes.TEXT               // TEXT
+	DataTypes.TEXT('tiny')       // TINYTEXT
+	DataTypes.CITEXT             // CITEXT          PostgreSQL and SQLite only.
+	DataTypes.TSVECTOR           // TSVECTOR        PostgreSQL only.
+	DataTypes.BOOLEAN            // TINYINT(1)
+	DataTypes.INTEGER            // INTEGER
+	DataTypes.BIGINT             // BIGINT
+	DataTypes.BIGINT(11)         // BIGINT(11)
+	DataTypes.FLOAT              // FLOAT
+	DataTypes.FLOAT(11)          // FLOAT(11)
+	DataTypes.FLOAT(11, 10)      // FLOAT(11,10)
+	DataTypes.REAL               // REAL            PostgreSQL only.
+	DataTypes.REAL(11)           // REAL(11)        PostgreSQL only.
+	DataTypes.REAL(11, 12)       // REAL(11,12)     PostgreSQL only.
+	DataTypes.DOUBLE             // DOUBLE
+	DataTypes.DOUBLE(11)         // DOUBLE(11)
+	DataTypes.DOUBLE(11, 10)     // DOUBLE(11,10)
+	DataTypes.DECIMAL            // DECIMAL
+	DataTypes.DECIMAL(10, 2)     // DECIMAL(10,2)
+
+	열을 정의할 때 defaultValue
+  myDate: { type: DataTypes.DATE, defaultValue: DataTypes.NOW },
+  title: { type: DataTypes.STRING, allowNull: false },
+
+  A.hasOne(B, { /* options */ });
+  A.belongsTo(B, { /* options */ });
+  A.hasMany(B, { /* options */ });
+  A.belongsToMany(B, { through: 'C', /* options */ });

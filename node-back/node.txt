@@ -1,0 +1,156 @@
+router
+주소 끝에 :id 가 붙어 있으면, :id를 의미하는 것이 아닌 다른 값이 들어가는 장소
+id: 에는 1, 3231, gugu 등을 아무거나 조회가 가능하고, req.params 객체 안에 들어가게 된다.
+		req.params 객체는 { id: 'foo'} 와 같이 형성된다.
+	admin 유저는 다른 처리를 하고 싶을 때, 위와 같은 일반 라우터보다 위에 위치해야 정상적으로 처리된다.
+		/user/admin
+		/user/:id
+	주소에 쿼리 스트링을 쓸 수 있는데, 키-값 정보는 req.query 객체 안에 들어있다.
+	주소는 같지만 메서드가 다른 코드가 있을 때, router.route 또는 app.route를 사용할 수 있따.
+
+response - 응답 객체
+ res.app: 똑같이 res 객체를 통해 app 객체에 접근한다. res.app.get('')같이 사용 가능.
+ res.set(헤더, 값) / res.setHeader(헤더, 값): 응답의 헤더를 설정한다. req.get()이 헤더값을 가져오는거라면 이건 헤더 설정
+ res.status(코드) / res.sendStatus(코드): 응답 시의 HTTP 상태 코드를 지정한다.
+ res.type(type) : Contents-Type 헤더를 설정할 수 있는 간단한 메서드.
+ res.cookie(키, 값, 옵션): 쿠키를 응답에 설정하는 메서드이다. (cookie-parser 패키지가 필요)
+ res.clearCookie(키, 값, 옵션): 쿠키를 응답에서 제거하는 메서드이다.
+ res.end(): 데이터 없이 응답을 보낸다.
+ res.json(JSON): JSON 형식의 응답을 보낸다.
+ res.redirect(주소): 리다이렉트할 주소와 함께 응답을 보낸다.
+ res.locals / res.render(뷰, 데이터):
+ res.locals는 뷰를 렌더링하는 기본 콘텍스트를 포함하는 객체다.
+ res.render는 jade와 같은 템플릿 엔진을 사용하여 뷰를 렌더링한다.
+ res.send(body), res.send(status, body) : 클라이언트에 응답을 보냄. 상태 코드는 옵션.
+	기본 콘텐츠 타입은 text/html이므로 text/plain을 보내려면 res.set(‘Content-Type’, ‘text/plain’)을 먼저 호출 해야한다. 
+ res.sendFile(경로): 경로에 위치한 파일을 응답한다.
+
+ res.attachment([filename]), res.download(path, [filename], [callback]) :
+ 	 클라이언트에게 	파일을 표시하지 말고 다운로드 받으라고 전송함. filename을 주면 파일 이름이 명시되며, res.attachment는 헤더만 설정하므로 다운로드를 위한 node 코드가 따로 필요하다.
+
+// 이 부분을 하나로 짧게 합친 express메소드
+res.writeHead(200, { 'Content-Type': 'application/json' });
+res.end(JSON.stringfy({'hello'}));
+ 
+res.json({'hello'})​​ 
+
+res.redirect([status], path) 상태 코드를 보인 후에 해당페이지로 강제이동
+
+request 요청 객체
+	req.app: req 객체를 통한 app 객체로의 접근이다. 예를 들어 req.app.get('port')와 같은 식으로 사용할 수 있다.
+	req.cookies: cookie-parser 미들웨어가 만드는 요청의 쿠키를 해석한 객체이다.
+	req.signedCookies: 서명된 쿠키들은 req.cookies 대신 여기에 담긴다.
+	req.get(헤더 이름): 헤더의 값을 가져온다. req.get('Content-type')
+	req.body: body-parser 미들웨어가 만드는 요청의 본문을 해석한 객체이다. POST 방식으로 넘어오는 데이터를 담는다. Post !!!!!!!!!
+	req.params: 라우트 매개변수에 대한 정보가 담긴다.
+	req.query: GET방식으로 넘어오는 데이터, 쿼리스트링의 정보가 담긴다. get !!!!!!!!
+
+	req.route : 현재 라우트에 관한 정보. 디버깅용.
+	req.headers : HTTP의 Header 정보를 가지고 있다.
+	req.accepts([types]) : 클라이언트가 해당하는 타입을 받을 수 있는지 확인하는 간단한 메서드.
+	req.ip: 요청의 ip 주소를 담는다.
+	req.path : 클라이언트가 요청한 경로. 프로토콜, 호스트, 포트, 쿼리스트링을 제외한 순수 요청 경로다.
+	req.host : 요청 호스트 이름을 반환하는 간단한 메서드. 조작될 수 있으므로 보안 목적으로는 사용하면 안된다.
+	req.xhr : 요청이 ajax 호출로 시작되었다면 true를 반환하는 프로퍼티
+	req.protocol : 현재 요청의 프로토콜 (http, https 등)
+	req.secure : 현재 요청이 보안 요청(SSL?) 이면 true를 반환
+	req.url (req.originalUrl) : URL 경로와 쿼리 스트링을 반환. 원본 요청을 logging하는 목적으로 많이 쓰임.
+	req.acceptedLanguages : 클라이언트가 선호하는 자연어 목록을 반환. header에서 파싱하면 다국어를 지원한는 어플리케이션이라면 초기 언어 선택에 도움을 줄 수 있음.
+
+node.js 에서 indexOf 의 결과값이 없으면, -1을 리턴한다.
+
+웹소켓(ws) 구조
+routes
+views
+socket.js 웹소켓 파일
+app.js
+
+// req.headers['authorization'] || req.connection.remoteAddress  //는 클라이언트의 IP를 알아내는 방법
+익스프레스에서는 IP를 확인할 때, proxy-addr 패키지를 사용
+
+ws.interval = setInterval(()=>{
+	if(ws.readyState === ws.OPEN){
+		ws.send('서버에서 클라이언트로 메시지를 보냅니다.'); 
+	}
+}, 3000);
+
+readyState 가 open 상태인지 확인
+웹 소켓의 네가지 상태 -> CONNECTING(연결중), OPEN(열림), CLOSING(닫는 중), CLOSED(닫힘)
+onopen, onmessage 를 사용
+open일 때만 에러 없이 메시지를 보낼 수 있다.
+웹 소켓은 사실상 .onmessage와 .send 로 메세지 통신을 하게 되는 것
+
+채팅에 특화된 건 socket.io 가 있다.
+채팅방 구현에 필요한 필수 메서드 ( on 이벤트 생성, once, 이벤트 한번 생성, off 이벤트의 핸들러 제거, emit 이벤트 발생)
+그 외 채팅방 기능의 확장할 때 get, of, to, join 등을 사용하여 더 세밀하게 구현 가능
+
+http-proxy-middleware 를 사용해서 프록시 서버도 구현해야하나?
+proxy: host:portNumber 
+
+server sent event
+서버의 데이터를 실시간으로, 지속적으로 streaming 하는 기술
+웹소켓은 - 채팅, 주식 트레이딩 데이터, 크립토 실시간 차트
+sse는 - 트위트 피드 받을 때, 페북에서 친추요청을 받을 때 
+
+status 정리
+	200 ok
+	201 created
+	204 No content
+	400 bad request
+	401 unauthorized
+	404 not found
+	409 conflict
+	500 internal server error
+
+파일 저장 (multer)
+	여러파일을 업로드 하는경우에는 HTML의 input 태그의 multiple을 씀
+	따로 따로 여러 개의 파일이라면 fields 미들웨어를 사용하거나, 인수로 input 태그들의 name들을 각각 적어넣음
+	storage는 저장할 공간에 대한 정보. 디스크나 메모리 저장 가능.
+	diskStorage 는 하드 디스크에 업로드 파일을 저장한다는 것.
+	destination은 저장할 경로
+	filename은 저장할 파일명(파일명 + 날짜 + 확장자 형식)
+	Limits는 파일 개수나 파일 사이즈를 제한할 수 있음
+	originalname : 사용자가 업로드한 파일명
+	mimitype : 파일의 mimie 타입
+	fieldname : 품에 정의된 필드명
+
+dotenv 
+	설정한 .env 파일을 읽어 process.env로 만들어줌.
+	.env 파일 작성할 때, 뒤에 ; 세미콜론 붙이면 안 됨
+  .env 파일은 .gitignore에 꼭 넣어둘 것
+
+
+path
+	path.parse : root, dir, base, ext, name 으로 파싱한 객체 생성
+	path.format : 파싱된 파일 경로 객체를 다시 '문자열'로 합침
+	path.normailize :  //나 \\ 등으로 경로 구분자를 잘못 사용해도, 알아서 정상 경로로 변환해줌
+	path.join('경로','경로',...) : 여러개의 경로를 알아서 합쳐줌, 상위, 현재경로도 알아서 처리, 중간에 /를 만나면 앞의 경로에 이어서 '상대경로'처리
+	path.resolve('경로','경로'...) : 중간에 /를 만나면 앞의 경로를 다 무시하고, '맨 처음부터' 다시 시작
+	path.basename('파일', 확장자) : 확장자 빼고 파일 이름만 출력
+	path.extname('파일') : 확장자를 출력
+	
+
+streaming
+	파일의 크기  = 재생 시간
+	reponse headers
+		Content-Range: <단위> start - end / size
+		Accept-Ranges: bytes  < 파일 크기가 몇 인지만 알려줌
+		Content-Length : 현재 위치
+	fs.createReadStream.pipe
+	fs.createWriteStream.pipe
+	.on('data')
+		setEnconding()을 사용한 겨우 'data' 이벤트가 버퍼 또는 문자열을 내보낸다.
+	.on('end')
+		스트림 데이터를 종료하는 이벤트
+		스트림에서 EOF(TCP 용어 FIN)가 수신되면 발생한다.
+	.pipe() 위의 두 기능을 다 넣은 것.
+
+	partInt() 문자열 인자를 파싱하여 정수를 반환
+	Number() 문자열이나 다른 값을 숫자로 반환
+
+	자바스크립트 정규표현식 / /g 에 넣기
+		g는 글로벌 검사를 뜻함.
+	문자 클래스 (Character classes)
+	 \d 모든 숫자와 일치하는 당에 해당
+	 \D 숫자가 아닌 모든 문자가 해당
+

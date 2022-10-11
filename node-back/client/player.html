@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Speed Player</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      body {
+        margin: 5% auto;
+        width: 100vw;
+        background-color: rgb(14, 14, 14);
+        padding-top: 10%;
+      }
+      #speed {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .copyRight {
+        font-size: 40px;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    </style>
+  </head>
+  <body>
+    <video id="videoPlayer" width="100%" controls muted="muted" autoplay>
+      <source src="http://127.0.0.1:5858/player/video" type="video/mp4" />
+    </video>
+    <div class="copyRight">저작권 ピコ太郎</div>
+    <div id="speed">
+      <button onclick="speedDot5()" type="button">0.5X Speed</button>
+      <button onclick="speedDot75()" type="button">0.75X Speed</button>
+      <button onclick="defaultRate()" type="button">Default Speed</button>
+      <button onclick="speed1Dot5()" type="button">1.5X Speed</button>
+      <button onclick="speed1Dot75()" type="button">1.75X Speed</button>
+      <button onclick="speed2()" type="button">2X Speed</button>
+      <button onclick="speed3()" type="button">3X Speed</button>
+      <button onclick="speed4()" type="button">4X Speed</button>
+      <button onclick="speed8()" type="button">8X Speed</button>
+      <button onclick="speed16()" type="button">16X Speed</button>
+    </div>
+    <script>
+      const v = document.getElementById('videoPlayer');
+      function speedDot5() {
+        v.playbackRate = 0.5;
+      }
+      function speedDot75() {
+        v.playbackRate = 0.75;
+      }
+      function defaulRate() {
+        v.playbackRate = 1;
+      }
+      function speed1Dot5() {
+        v.playbackRate = 1.5;
+      }
+      function speedDot75() {
+        v.playbackRate = 1.75;
+      }
+      function speed2() {
+        v.playbackRate = 2;
+      }
+      function speed3() {
+        v.playbackRate = 3;
+      }
+      function speed4() {
+        v.playbackRate = 4;
+      }
+      function speed8() {
+        v.playbackRate = 8;
+      }
+      function speed16() {
+        v.playbackRate = 16;
+      }
+    </script>
+  </body>
+</html>
