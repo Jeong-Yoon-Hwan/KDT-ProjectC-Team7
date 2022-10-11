@@ -146,10 +146,9 @@ const Container = styled.div`
     .column-item:nth-child(odd){
       background-color: #e0e0e0;
     }
-
-
     
   }
+  //로딩
   .img {
     position: relative;
     width: 70px;
