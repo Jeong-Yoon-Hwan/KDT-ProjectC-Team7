@@ -47,7 +47,7 @@ if(insertedToken){
 const App = () =>{
     return (
       <>
-      {/* {
+      {
     //로컬스토리지에 토큰이 있을때는 메인페이지, 없을때는 로그인페이지로 이동
         insertedToken ? (
           <>
@@ -61,14 +61,14 @@ const App = () =>{
               <LoginArea/>
             </>
           )
-        } */}
+        }
 
-        <>
+        {/* <>
           <section>
             <Main></Main>
           </section>
           <SideArea/>
-        </>
+        </> */}
       </>
     )
 }
