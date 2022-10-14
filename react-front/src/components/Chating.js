@@ -9,64 +9,6 @@ import alarmStyle from "../common/alarmMessageStyle";
 
 const ws = new WebSocket("ws://localhost:3001");
 
-const Alarm = styled.div`
-  width:100%;
-  height:25px;
-  background-color: gray;
-`
-const MainBox = styled.div`
-  width:inherit ;
-  height:90vh;
-  
-  //메인채팅창//
-  & > main {
-    position:relative;
-    width: inherit;
-    height:calc(100% - 50px);
-    background-color:#f1f1f1;
-    display:flex;
-    flex-direction:column;
-    justify-content:end;
-    overflow:hidden;
-
-      //전체 채팅박스
-      & > div {
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:end; 
-      }
-  }
-
-//채팅 입력칸
-  & > section{
-    width:inherit;
-    height:50px;
-    background-color:white;
-    box-shadow: 0 -4px 4px #f1f1f1;
-    display:flex;
-    align-items:center;
-    justify-content:end;
-
-      & > input {
-        border:0;
-        padding:10px;
-        outline:none;
-        width:90%;
-        height:inherit;
-      }
-
-      & > button {
-        width:80px;
-        height:50px;
-        background-color:#464BF2;
-        color:white;
-        border:0;
-        border-radius:2px;
-        font-weight:bold;
-      }
-  }
-`
 
 const Chating = () => {
   const inputRef = useRef();
@@ -163,3 +105,66 @@ const Chating = () => {
 
 
 export default Chating;
+
+
+
+
+
+const Alarm = styled.div`
+  width:100%;
+  height:25px;
+  background-color: gray;
+`
+const MainBox = styled.div`
+  width:inherit ;
+  height:90vh;
+  
+  //메인채팅창//
+  & > main {
+    position:relative;
+    width: inherit;
+    height:calc(100% - 50px);
+    background-color:#f1f1f1;
+    display:flex;
+    flex-direction:column;
+    justify-content:end;
+    overflow:hidden;
+
+      //전체 채팅박스
+      & > div {
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:end; 
+      }
+  }
+
+//채팅 입력칸
+  & > section{
+    width:inherit;
+    height:50px;
+    background-color:white;
+    box-shadow: 0 -4px 4px #f1f1f1;
+    display:flex;
+    align-items:center;
+    justify-content:end;
+
+      & > input {
+        border:0;
+        padding:10px;
+        outline:none;
+        width:90%;
+        height:inherit;
+      }
+
+      & > button {
+        width:80px;
+        height:50px;
+        background-color:#464BF2;
+        color:white;
+        border:0;
+        border-radius:2px;
+        font-weight:bold;
+      }
+  }
+`
