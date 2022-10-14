@@ -9,6 +9,9 @@ import Info from '../pages/Info.js';
 import Board from '../pages/board.js';
 
 const MainBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width:calc(100vw - 400px); 
   height:90vh; 
   background-color:white;
