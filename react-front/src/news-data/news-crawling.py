@@ -17,11 +17,14 @@ if __name__ == "__main__":
     response = requests.get(inputURL, headers=headers)
     beautifulSoup = BeautifulSoup(response.content, "html.parser")
 
+    #기사 제목
     title = beautifulSoup.select(".type06_headline > li > dl > dt:not(.photo) > a")
+
+    #기사내용
     content = beautifulSoup.select(".lede")
 
     #이미지
-    thumbnails = beautifulSoup.select(".photo > a > img")
+    thumbnails = beautifulSoup.select(".type06_headline > li > dl > .photo > a > img")
 
     headline.clear() #배열값 비우기
     contents.clear()
@@ -71,3 +74,4 @@ for new in thumbnails:
   src = new["src"]
   dload.save(src,f'imgs/{i}.jpg')
   i+=1
+

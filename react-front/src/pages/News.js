@@ -11,13 +11,14 @@ const News = () =>{
   return(
     <Container>
       <MainContainer>
-        <header>최신 뉴스 목록</header>
+        <header>최신 금융 기사</header>
         <main>
             {jsonData.map((value,index)=>{
               return (
                 <NewsBox>
                   <div>
-                    <article>이미지입니당</article>
+                    
+                    <article>{/*이미지 */}</article>
                     <section>
                       <h3>{value.title}</h3>
                       <p>{value.content}</p>
@@ -83,7 +84,7 @@ const NewsBox = styled.div`
     //이미지 영역 임시
     & > article {
       width: 10vw;
-      height: 100%;
+      //height: 100%;
       background-color: coral;
     }
 
