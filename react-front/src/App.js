@@ -31,7 +31,7 @@ const auth = () =>{
 }
 
 //페이지가 로드 되었을때 인증값 전송
-if(insertedToken){
+if(insertedToken && localStorage.getItem("nickname") !== "admin"){
   window.onload = ()=>{ //새로고침 될때마다 실행
     auth();
   }
@@ -48,6 +48,7 @@ const App = () =>{
     return (
       <>
       {
+        
     //로컬스토리지에 토큰이 있을때는 메인페이지, 없을때는 로그인페이지로 이동
         insertedToken ? (
           <>
