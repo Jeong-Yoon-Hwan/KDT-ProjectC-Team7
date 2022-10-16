@@ -17,7 +17,7 @@ if __name__ == "__main__":
     response = requests.get(inputURL, headers=headers)
     beautifulSoup = BeautifulSoup(response.content, "html.parser")
 
-    title = beautifulSoup.select(".type06_headline > li > dl > dt:nth-child(2) > a")
+    title = beautifulSoup.select(".type06_headline > li > dl > dt:not(.photo) > a")
     content = beautifulSoup.select(".lede")
 
     #이미지
@@ -55,7 +55,7 @@ newsArr = []
 while i < len(headline):
   newsArr.append(newsData(i+1,headline[i],contents[i]).__dict__)
   i = i+1
-
+print(len(headline))
 print(newsArr)
 
 
