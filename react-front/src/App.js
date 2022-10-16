@@ -31,11 +31,7 @@ const auth = () =>{
 }
 
 //페이지가 로드 되었을때 인증값 전송
-<<<<<<< HEAD
-if(insertedToken && localStorage.getItem("nickname") !== "admin"){
-=======
 if(insertedToken && localStorage.getItem("nickname")!=="admin"){
->>>>>>> yoonhwan
   window.onload = ()=>{ //새로고침 될때마다 실행
     auth();
   }
