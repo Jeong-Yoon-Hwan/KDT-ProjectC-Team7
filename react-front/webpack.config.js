@@ -33,7 +33,21 @@ module.exports = {
                         loader: 'css-loader', 
                     },
                 ]
+            },
+            {
+              test: /\.(png|jpg|gif)$/i,
+              use: [
+                {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 4000,
+                    name: 'images/[name].[ext]',
+                    esModule: false
+                  }
+                },
+              ]
             }
+            
         ]
     },
     plugins: [
@@ -43,6 +57,7 @@ module.exports = {
         })
         
     ],
+    
     devServer: {
         host: 'localhost',
         port: 8000,

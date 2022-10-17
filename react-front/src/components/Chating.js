@@ -2,7 +2,6 @@ import React,{useRef,useState} from "react"
 import styled from "styled-components"
 import axios from "axios"
 import useInput from "../hooks/useInput";
-import { createChart } from "lightweight-charts";
 import messageStyle from "../common/chatMessageStyle";
 import alarmStyle from "../common/alarmMessageStyle";
 

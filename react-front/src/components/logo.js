@@ -14,7 +14,7 @@ const Logo = () =>{
   const showModal = () =>{
     setModalOpen(true);
   }
- 
+
   const logOut = () =>{
     localStorage.clear();
     location.reload();

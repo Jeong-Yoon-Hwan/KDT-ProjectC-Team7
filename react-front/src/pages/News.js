@@ -1,12 +1,11 @@
-import React, { createElement, useRef } from "react";
+import React, { createElement, useRef, useState } from "react";
 import styled from "styled-components";
-import jsonData from "../news-data/news.json"
+import jsonData from "../news-data/news.json";
+import NewsMainText from "../components/NewsMainText";
 
 
 const News = () =>{
-
   console.log(jsonData)
-
 
   return(
     <Container>
@@ -15,10 +14,9 @@ const News = () =>{
         <main>
             {jsonData.map((value,index)=>{
               return (
-                <NewsBox>
+                <NewsBox key={index}>
                   <div>
-                    
-                    <article>{/*이미지 */}</article>
+                    <img src={value.imgSrc}></img>
                     <section>
                       <h3>{value.title}</h3>
                       <p>{value.content}</p>
@@ -28,12 +26,9 @@ const News = () =>{
               )
             })}
         </main>
-        
       </MainContainer>
     </Container>
   )
-
-  
 }
 
 export default News;
@@ -53,9 +48,7 @@ const MainContainer = styled.div`
 
   & > header {
     padding:1%;
-  
   }
-  
   & > main {
     width:100%;
     height:100%;
@@ -66,26 +59,32 @@ const MainContainer = styled.div`
     overflow: hidden;
     padding : 20px;
     overflow-y: scroll;
+    position: relative;
+    
   }
 `
 
 const NewsBox = styled.div`
-
+  
   //전체 뉴스 박스입니다.
   & > div{
+    //background:${props => props.color || "#464BF2"};
     display: flex;
     width:100%;
-    height:20vh;
+    //height:15vh;
+    height:15vh;
     background-color: white;
     padding: 20px;
     border-radius: 2px;
     box-shadow: 1px 1px 10px gray ;
-
+    
     //이미지 영역 임시
-    & > article {
-      width: 10vw;
+    & > img {
+      width: 150px;
+      height:100px;
       //height: 100%;
-      background-color: coral;
+      //background-color: coral;
+      
     }
 
     //뉴스 텍스트 영역 입니다.
@@ -94,11 +93,13 @@ const NewsBox = styled.div`
       display: flex;
       flex-direction: column;
       gap:20%;
-
+      
       & > p {
         color:gray;
       }
     }
     
   }
+
 `
+
