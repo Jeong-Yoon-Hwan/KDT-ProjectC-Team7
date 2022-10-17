@@ -10,6 +10,7 @@ import playerRouter from './router/player.js'; // 동영상 재생
 import tradeRouter from './router/trade.js'; // 가상화폐 매매
 import { config, corsOptions } from './config/config.js';
 import { sqz } from './database/mysql.js';
+import { webSocket } from './controller/websocket.js';
 
 process.setMaxListeners(50);
 
@@ -33,7 +34,8 @@ app.use((error, req, res, next) => {
 sqz
   .sync()
   .then(() => {
-    app.listen(config.server.port);
+    const server = app.listen(config.server.port);
+    webSocket(server);
     console.log('서버를 가동합니다');
   })
   .catch((error) => {
