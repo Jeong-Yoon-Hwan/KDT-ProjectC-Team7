@@ -51,6 +51,18 @@ const Chating = () => {
     //인풋에 입력한 값을 message로 전송
     const message = chat.value;
 
+    axios.post("http://localhost:5858/chat",
+      {
+        nickname : localStorage.getItem("nickname"),
+        text : chat.value        
+      }
+
+    ).then((response)=>{
+      console.log(response)
+    }).catch((error)=>{
+      console.log(error)
+    })
+
     const msg = {
       type:"message",
       text:message,
