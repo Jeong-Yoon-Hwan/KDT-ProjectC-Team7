@@ -2,12 +2,21 @@ import React, { createElement, useRef, useState } from "react";
 import styled from "styled-components";
 import jsonData from "../news_data/news.json";
 import NewsMainText from "../components/NewsMainText";
-
+import axios from "axios"
 
 
 const News = () =>{
   console.log(jsonData)
   
+  axios.post("http://127.0.0.1:5000",
+    {
+      "name" : "hello",
+    }
+  ).then((response)=>{
+    console.log(response)
+  }).catch((error)=>{
+    console.log(error)
+  })
   const [title,setTitle] = useState("")
   const [mainText,setMainText] = useState("")
   
@@ -92,6 +101,7 @@ const NewsBox = styled.div`
     padding: 20px;
     border-radius: 2px;
     box-shadow: 1px 1px 10px gray ;
+    overflow: hidden;
     //이미지 영역 임시
     & > img {
       width: 150px;

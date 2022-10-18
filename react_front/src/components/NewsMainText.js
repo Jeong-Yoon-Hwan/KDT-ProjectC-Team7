@@ -25,6 +25,7 @@ const Container = styled.div`
   display: flex;
   flex-direction:column;
   width:45vw;
+  max-height: 600px;
   height:max-content;
   background-color: white;
   position: absolute;
@@ -35,6 +36,7 @@ const Container = styled.div`
   gap:10px;
   box-shadow: 4px 4px 30px;
   z-index: 1;
+  overflow-y: scroll;
 
   & > header {
     width: 100%;
