@@ -13,6 +13,13 @@ const LoginForm = () => {
   const nickname = useInput();
   const password = useInput();
 
+  const handleOnKeyPress = (e) =>{
+    if(e.key === "Enter"){
+      handleSubmit(e);
+    } 
+  }
+
+  
   //아이디 비밀번호 값 보내기
   function handleSubmit(event){
     event.preventDefault();
@@ -71,6 +78,7 @@ const LoginForm = () => {
           placeholder="비밀번호를 입력하세요" 
           value={password.value}
           onChange={password.onChange}
+          onKeyPress={handleOnKeyPress}
         />
         <Button onClick={handleSubmit}>로그인</Button>
         <Button type="button"><Link to="/userFind">아이디 / 비밀번호찾기</Link></Button>
