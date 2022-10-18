@@ -20,16 +20,26 @@ const Chating = () => {
   
   //* 서버에서 보낸 메세지 받기
   function receiveMessage(event){
+
+    //채팅 내용과 닉네임이 들어갈 박스
+    const chatBox = document.createElement("div")
+
     // 채팅이 입력될 박스를 생성
     const chat = document.createElement("div")
     //메세지가 입력될요소를 생성
     const msg = JSON.parse(event.data); //msg에 data를 JSON객체로 받아옴.
     const message = document.createTextNode(msg.text)
+    
+    //* 이름이 표시될 박스
+    const nameBox = document.createElement("div")
+    nameBox.textContent = msg.nickname;
+    
+    chatBox.appendChild(nameBox)
 
     //* 메세지 타입이 "message" 일때
     if(msg.type==="message"){
       //* 채팅박스 스타일 지정 >> 일단 함수로 만들어놨음..
-      messageStyle(chat,msg.nickname,localStorage.getItem("nickname"));
+      messageStyle(chatBox,chat,nameBox,msg.nickname,localStorage.getItem("nickname"));
     }else {
       alarmStyle(chat);
     }
@@ -37,8 +47,10 @@ const Chating = () => {
     //메세지를 채팅박스에 추가
     chat.appendChild(message);
 
-    //채팅박스에 chat 추가함
-    MessageBox.current.appendChild(chat)
+    chatBox.appendChild(chat);
+
+    //채팅박스에 메세지를 추가함
+    MessageBox.current.appendChild(chatBox)
     
   }
   ws.onmessage = receiveMessage //서버에 데이터가 전송되었을때 함수 실행
