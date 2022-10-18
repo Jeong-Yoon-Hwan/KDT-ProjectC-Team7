@@ -4,8 +4,20 @@ import jsonData from "../news-data/news.json";
 import NewsMainText from "../components/NewsMainText";
 
 
+
 const News = () =>{
   console.log(jsonData)
+  
+  const [title,setTitle] = useState("")
+  const [mainText,setMainText] = useState("")
+  
+
+  const [modalOpen,setModalOpen] = useState(false)
+  const modalHandle = (title,mainText) =>{
+    setModalOpen(true);
+    setTitle(title);
+    setMainText(mainText);
+  }
 
   return(
     <Container>
@@ -14,7 +26,9 @@ const News = () =>{
         <main>
             {jsonData.map((value,index)=>{
               return (
-                <NewsBox key={index}>
+                <NewsBox key={index} onClick={()=>{
+                  modalHandle(value.title,value.main_text)
+                }}>
                   <div>
                     <img src={value.imgSrc}></img>
                     <section>
@@ -26,6 +40,7 @@ const News = () =>{
               )
             })}
         </main>
+        { modalOpen && <NewsMainText setModalOpen={setModalOpen} title={title} mainText={mainText}/>}
       </MainContainer>
     </Container>
   )
@@ -65,7 +80,7 @@ const MainContainer = styled.div`
 `
 
 const NewsBox = styled.div`
-  
+   
   //전체 뉴스 박스입니다.
   & > div{
     //background:${props => props.color || "#464BF2"};
@@ -77,23 +92,17 @@ const NewsBox = styled.div`
     padding: 20px;
     border-radius: 2px;
     box-shadow: 1px 1px 10px gray ;
-    
     //이미지 영역 임시
     & > img {
       width: 150px;
       height:100px;
-      //height: 100%;
-      //background-color: coral;
-      
     }
-
     //뉴스 텍스트 영역 입니다.
     & > section {
       padding:10px;
       display: flex;
       flex-direction: column;
       gap:20%;
-      
       & > p {
         color:gray;
       }
@@ -102,4 +111,6 @@ const NewsBox = styled.div`
   }
 
 `
+
+
 

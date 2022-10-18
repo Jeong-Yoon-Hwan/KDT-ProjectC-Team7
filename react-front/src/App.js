@@ -63,13 +63,6 @@ const App = () =>{
             </>
           )
         }
-
-        {/* <>
-          <section>
-            <Main></Main>
-          </section>
-          <SideArea/>
-        </> */}
       </>
     )
 }

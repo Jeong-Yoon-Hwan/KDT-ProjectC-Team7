@@ -40,38 +40,42 @@ if __name__ == "__main__":
 
   #select로 찾은 태그값을 반복문으로 자식태그들을 모두 출력
 
-  #제목
-    for news in title :    
-      #print(news.text)
-      #print(news['href'])
-      headline.append((news.text).strip())
-      main_textURL.append((news['href']).strip())
-  #내용
-    for news in content :
-      #print(news.text)
-      contents.append((news.text).strip())
-  
-  #이미지 파일명 저장
-    for imgs in imgSrc:
-      img_src.append((imgs["src"]))
-      
-   # print(img_src)
 
-    i = 0
+def newsAdd():
+
+#제목
+  for news in title :    
+    #print(news.text)
+    #print(news['href'])
+    headline.append((news.text).strip())
+    main_textURL.append((news['href']).strip())
+  print(headline)
+#내용
+  for news in content :
+    #print(news.text)
+    contents.append((news.text).strip())
+
+#이미지 파일명 저장
+  for imgs in imgSrc:
+    img_src.append((imgs["src"]))
     
+  # print(img_src)
+
+  i = 0
+  
 # 본문 가져오기
-    while i < len(main_textURL):
-      response2 = requests.get(main_textURL[i], headers= headers)
-      beautifulSoup2 = BeautifulSoup(response2.content, "html.parser")
-      
-
-      test = beautifulSoup2.find("div",{"class":"newsct_article _article_body"})
-      main_text.append(test.get_text().strip())
-      
-      i = i+1
+  while i < len(main_textURL):
+    response2 = requests.get(main_textURL[i], headers= headers)
+    beautifulSoup2 = BeautifulSoup(response2.content, "html.parser")
+    test = beautifulSoup2.find("div",{"class":"newsct_article _article_body"})
+    main_text.append(test.get_text().strip())
+    
+    i = i+1
 
       
-    print(main_text[8])
+    #print(main_text[8])
+newsAdd()
+
 
 # 클래스 생성
 class newsData:
