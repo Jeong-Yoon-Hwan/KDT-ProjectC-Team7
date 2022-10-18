@@ -117,3 +117,4 @@ plt.show()
 # from numpyencoder import NumpyEncoder
 
 # a = JSON.dumps(dataY_plot, cls=NumpyEncoder, indent=4, ensure_ascii=False)
+
