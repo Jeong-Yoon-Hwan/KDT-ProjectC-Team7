@@ -1,9 +1,14 @@
 from flask import Flask, escape, request
 
+from . import newsCrawling
+
+
 app = Flask(__name__)
 
 @app.route('/')
 def hello():
+
+  newsCrawling.newsAdd()
   name = request.args.get("name","World")
   return f'hello,{escape(name)}!'
 

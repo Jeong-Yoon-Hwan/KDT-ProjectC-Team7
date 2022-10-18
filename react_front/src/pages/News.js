@@ -1,6 +1,6 @@
 import React, { createElement, useRef, useState } from "react";
 import styled from "styled-components";
-import jsonData from "../news-data/news.json";
+import jsonData from "../news_data/news.json";
 import NewsMainText from "../components/NewsMainText";
 
 
