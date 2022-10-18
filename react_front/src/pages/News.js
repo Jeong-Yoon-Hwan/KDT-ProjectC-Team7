@@ -7,16 +7,23 @@ import axios from "axios"
 
 const News = () =>{
   console.log(jsonData)
-  
-  axios.post("http://127.0.0.1:5000",
+
+
+  //뉴스 새로고침
+  const newsRefresh = () =>{
+    axios.post("http://127.0.0.1:5000",
     {
       "name" : "hello",
     }
-  ).then((response)=>{
-    console.log(response)
-  }).catch((error)=>{
-    console.log(error)
-  })
+    ).then((response)=>{
+      console.log(response)
+      location.reload();
+    }).catch((error)=>{
+      console.log(error)
+    })
+    
+  }
+  
   const [title,setTitle] = useState("")
   const [mainText,setMainText] = useState("")
   
@@ -31,7 +38,10 @@ const News = () =>{
   return(
     <Container>
       <MainContainer>
-        <header>최신 금융 기사</header>
+        <header>
+          <h3>최신 금융 기사</h3>
+          <Button onClick={newsRefresh}>새로고침</Button>
+        </header>
         <main>
             {jsonData.map((value,index)=>{
               return (
@@ -72,6 +82,8 @@ const MainContainer = styled.div`
 
   & > header {
     padding:1%;
+    display: flex;
+    justify-content: space-between;
   }
   & > main {
     width:100%;
@@ -124,3 +136,12 @@ const NewsBox = styled.div`
 
 
 
+const Button = styled.button`
+  width:228px;
+  height:44px;
+  background:${props => props.color || "#464BF2"};
+  color:white;
+  border:0;
+  border-radius:2px;
+  font-weight:bold;
+`
