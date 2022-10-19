@@ -1,7 +1,8 @@
-def stock(marketCode, year):
+def stock(marketCode, start, end):
       import datetime as dt
       import FinanceDataReader as fdr
-      df = fdr.DataReader(marketCode,year)
+      df = fdr.DataReader(marketCode, start, end)
+      print(df)
       df['date']=df.index
       df.reset_index()
       df.drop('Volume', axis=1, inplace=True)
