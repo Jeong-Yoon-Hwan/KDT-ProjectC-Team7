@@ -18,16 +18,18 @@ def predict_learn():
 def info_stock():
    data = request.get_json()
    marketCode = data['marketCode']
-   year = data['year']     
-   return stock(marketCode, year)
+   start = data['start'] 
+   end = data['end']    
+   return stock(marketCode, start, end)
 
 @app.route('/info_coin', methods=['POST'])
 def info_coin():
    data = request.get_json()
    marketCode = data['marketCode']
    interval = data['interval']
+   to = data['to']
    count = int(data['count'])
-   return coin(marketCode, interval, count)
+   return coin(marketCode, interval,  to, count)
 
 if __name__ == '__main__':  
    app.run('127.0.0.1',port=5959,debug=True)

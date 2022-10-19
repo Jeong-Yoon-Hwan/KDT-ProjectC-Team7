@@ -1,8 +1,8 @@
-def coin(marketCode, interval, count):
+def coin(marketCode, interval, to, count):
 		import pandas as pd
 		import pyupbit as upbit
 		import datetime as dt
-		data = upbit.get_ohlcv(ticker=marketCode, interval=interval, count=count)
+		data = upbit.get_ohlcv(ticker=marketCode, to=to, interval=interval, count=count)
 		df = pd.DataFrame(data)
 		df['date']=df.index
 		df.reset_index()
@@ -17,5 +17,5 @@ def coin(marketCode, interval, count):
 		print(result)
 		return result
 
-# coin('KRW-BTC', 'day', 5)
-#KRW-BTC, day, 30
+
+# coin('KRW-BTC', 'day', '2022-07-20', 5)
