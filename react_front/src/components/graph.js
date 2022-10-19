@@ -6,7 +6,7 @@ import {
 
 const dateArray = [];
 dateArray.push((getDateRangeData("2022-10-01","2022-10-10")))
-console.log(dateArray)
+//console.log(dateArray)
 
 
 function dayData(name, uv,pv,amt){
@@ -70,4 +70,4 @@ function getDateRangeData(param1, param2){  //param1은 시작일, param2는 종
    	}
    	return res_day;
 }
-console.log(getDateRangeData("2022-09-10","2022-10-10"))
+//console.log(getDateRangeData("2022-09-10","2022-10-10"))
