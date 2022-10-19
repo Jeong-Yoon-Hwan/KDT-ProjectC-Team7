@@ -22,6 +22,7 @@ const Chating = () => {
     reloadMessage();
   }
 
+  //* 새로고침 했을때 전체 메시지 데이터 받아서 출력=============
   function reloadMessage(){
     let text = []; //? 메세지 내용
     let nickname = []; //? 유저닉네임
@@ -34,7 +35,7 @@ const Chating = () => {
         }
       }
     ).then((res)=>{
-      console.log(res.data)
+      //console.log(res.data)
       //let value = res.data;
       
         for(let i=0;i<res.data.length;i++){
@@ -42,10 +43,6 @@ const Chating = () => {
           nickname.push(res.data[i].nickname)
           writeTime.push(res.data[i].writeTime)
         }
-        // console.log(text);
-        // console.log(nickname);
-        // console.log(writeTime);
-
       //* DB에 저장된 메시지의 개수만큼 반복하여 메시지 박스를 화면에 출력
         for(let i=0;i<text.length;i++){
           let chatBox = document.createElement("div")
@@ -69,7 +66,7 @@ const Chating = () => {
       })
   }
 
-  //* 서버에서 보낸 메세지 받기
+  //* 서버에서 보낸 메세지 받기==================================================
   function receiveMessage(event){
     
     
@@ -111,8 +108,10 @@ const Chating = () => {
   
   const chat = useInput();
 
+//*=========================메시지 받기 끝==========================================
 
-  //====================보내기 버튼 눌렀을때 채팅내용 담은 박스 생성====================================
+
+  //?====================보내기 버튼 눌렀을때 채팅내용 담은 박스 생성====================================
   const onSubmit = () =>{  
     
     //인풋에 입력한 값을 message로 전송
@@ -154,6 +153,11 @@ const Chating = () => {
     }
     clearInput();
   }
+//?============================= 채팅 보내기 끝========================================
+
+
+
+
 //엔터키를 눌렀을때 submit 입력
   const onEnter = (e) =>{
     if(e.key === "Enter"){
