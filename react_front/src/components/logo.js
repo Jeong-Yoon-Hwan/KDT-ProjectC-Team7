@@ -17,7 +17,7 @@ const Logo = () =>{
 
   const logOut = () =>{
     localStorage.clear();
-    location.reload();
+    location.href="http://localhost:8000/"
   }
 
   const [userDeleteOpen,setUserDeleteOpen] = useState(false);

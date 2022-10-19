@@ -18,8 +18,8 @@ def predict_learn():
 def info_stock():
    data = request.get_json()
    marketCode = data['marketCode']
-   start = data['start'] 
-   end = data['end']    
+   start = data['start']     
+   end = data['end']
    return stock(marketCode, start, end)
 
 @app.route('/info_coin', methods=['POST'])
