@@ -1,5 +1,4 @@
 
-
 const messageStyle = (main,chat,name,typeCompare,compareValue) =>{
   if(typeCompare === compareValue){
     chat.style.backgroundColor="#F2DA46";
