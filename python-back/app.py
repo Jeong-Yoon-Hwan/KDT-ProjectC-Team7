@@ -5,7 +5,7 @@ from controller.predict import machineLearn
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS()
+CORS(app)
 @app.errorhandler(500)
 def error__handling_500(error):
    return jsonify({'Error':'Internal 500 error'},500)
@@ -27,8 +27,9 @@ def info_coin():
    data = request.get_json()
    marketCode = data['marketCode']
    interval = data['interval']
+   to = data['to']
    count = int(data['count'])
-   return coin(marketCode, interval, count)
+   return coin(marketCode, interval,  to, count)
 
 if __name__ == '__main__':  
    app.run('127.0.0.1',port=5959,debug=True)
