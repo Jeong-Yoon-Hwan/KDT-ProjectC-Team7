@@ -64,7 +64,7 @@
         let codename = document.getElementById('codeName').value;
         axios.post('http://127.0.0.1:5858/trade/wantName',
          {
-          name:codename}).then((res)=> {return res.json()}).then((r)=>alert(r)).catch((error)=>console.error(error))
+          name:codename}).then((res)=> {alert(res.data)}).catch((error)=>console.error(error))
       }
 
       
