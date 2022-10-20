@@ -38,12 +38,12 @@ const Chart = () => {
         <header>
           <h1>실시간 가상화폐 순위</h1>
           <button onClick={ refreshPage }><span className="material-symbols-outlined">refresh</span></button>
-          <div><input onClick={chartHandle} type="checkbox" /><label>테이블</label></div>
+          {/* <div><input onClick={chartHandle} type="checkbox" /><label>테이블</label></div> */}
         </header>
-        {//chart 상태가 true이면 테이블 false이면 그래프
+        {/* {//chart 상태가 true이면 테이블 false이면 그래프
           chart ? (
             <Graph></Graph>
-          ) : (
+          ) : ( */}
             <section>
         
           {
@@ -82,8 +82,8 @@ const Chart = () => {
           }
         </section>
 
-          )  
-        }
+          {/* )  
+        } */}
         
         
       </Container>
