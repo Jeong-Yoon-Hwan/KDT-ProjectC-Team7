@@ -1,5 +1,16 @@
 import { ExchangeService, QuoationService } from 'node-upbit';
+import { findCode } from '../data/marketCode.js';
 
+// 마켓 코드 한글 검색
+export async function wantName(req, res) {
+  const name = req.body.name;
+  const find = findCode(name);
+  if (!find) {
+    return res.status(404).json({ message: '해당 종목이 없습니다' });
+  } else {
+    return res.status(200).json(find);
+  }
+}
 /* 인증키가 필요 없음 */
 const quoationService = new QuoationService();
 
