@@ -32,3 +32,10 @@ export const account = [
   validatorError,
 ];
 export const orderInfo = [...account, ...vMarketCoin];
+export const findChart = [
+  body('name')
+    .notEmpty()
+    .isLength({ min: 1, max: 10 })
+    .withMessage('마켓 이름을 한국어로 올바르게 입력해주세요'),
+  validatorError,
+];
