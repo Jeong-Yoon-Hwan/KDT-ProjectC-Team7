@@ -4,8 +4,9 @@ import * as vdTrade from '../middleware/validatorTrade.js';
 import { isAuth } from '../middleware/auth.js';
 
 const router = express.Router();
-router.post('/wantName', vdTrade.findChart, tradeController.wantName);
+
 router.get('/', isAuth, tradeController.marketCode); // 마켓 코드 조회
+router.post('/wantName', vdTrade.findChart, tradeController.wantName); // 마켓 코드명만 보여줌
 router.post(
   '/minuteCandle',
   vdTrade.minuteCandle,
