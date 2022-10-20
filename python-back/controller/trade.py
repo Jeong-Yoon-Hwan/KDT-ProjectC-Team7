@@ -13,11 +13,11 @@ def buy_order(access, secret, market, price):
 			print(x)
 			return None
 
-def sell_order(access, secret, market, price):
+def sell_order(access, secret, market, volume):
 		from pyupbit.exchange_api import Upbit
 		try:
 			upbit = Upbit(access, secret)
-			upbit.sell_market_order(market, str(price))
+			upbit.sell_market_order(market, str(volume))
 		except Exception as x:
 			print(x)
 			return None
