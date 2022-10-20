@@ -2,7 +2,7 @@ import React from "react"
 
 const Trading = () =>{
   return(
-    <div>자동매매</div>
+    <div>차트조회</div>
   )
 }
 
