@@ -27,9 +27,11 @@
     "mysql2": "^2.3.3",
     "node-upbit": "^1.1.0",
     "querystring": "^0.2.1",
+    "request": "^2.88.2",
     "sequelize": "^6.23.2",
     "socket.io": "^4.5.2",
-    "uuidv4": "^6.2.13"
+    "urlencode": "^1.1.0",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"

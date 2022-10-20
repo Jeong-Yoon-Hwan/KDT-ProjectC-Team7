@@ -19,9 +19,10 @@ export const config = {
     database: Env.MYSQL_DATABASE,
     password: Env.MYSQL_PASSWORD,
   },
-  trade: {
-    accessKey: Env.UBIT_ACCESS_KEY,
-    secretKey: Env.UBIT_SECRET_KEY,
+  upbit: {
+    accessKey: Env.UPBIT_ACCESS_KEY,
+    secretKey: Env.UPBIT_SECRET_KEY,
+    upbitUrl: Env.UPBIT_URL,
   },
 };
 
