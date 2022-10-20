@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, jsonify
+from controller import trade
+from flask_cors import CORS
 from controller.stockInfo import stock
 from controller.coinInfo import coin
 from controller.predict import machineLearn
-from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
@@ -30,6 +31,35 @@ def info_coin():
    to = data['to']
    count = int(data['count'])
    return coin(marketCode, interval,  to, count)
+
+@app.route('/buy_order', methods=['POST'])
+def buy_order():  
+   data = request.get_json()
+   accessKey = data['accessKey']
+   secretKey = data['secretKey']
+   marketCode = data['marketCode']
+   price = int(data['price'])
+   return trade.buy_order(accessKey, secretKey, marketCode, price)
+
+
+@app.route('/sell_order', methods=['POST'])
+def sell_order():
+   data = request.get_json()
+   accessKey = data['accessKey']
+   secretKey = data['secretKey']
+   marketCode = data['marketCode']
+   volume = str(data['volume'])
+   return trade.sell_order(accessKey, secretKey, marketCode, volume)
+   
+
+@app.route('/cancel_order', methods=['POST'])
+def cancel_order():
+   data = request.get_json()
+   accessKey = data['accessKey']
+   secretKey = data['secretKey']
+   uuid = data['uuid']
+   return trade.cancel_order(accessKey, secretKey, uuid)
+
 
 if __name__ == '__main__':  
    app.run('127.0.0.1',port=5959,debug=True)
