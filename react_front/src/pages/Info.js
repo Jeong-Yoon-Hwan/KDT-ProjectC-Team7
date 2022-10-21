@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import currentPrices from "../common/currentPrice";
+import AutoTrade from "../components/autoTrade";
 
 const Info = () =>{
   purchaseData();
@@ -39,8 +40,6 @@ const Info = () =>{
   const getAssetList = localStorage.getItem("AssetList");
   const AssetList = JSON.parse(getAssetList);
  // console.log(AssetList[1])
-  
-
   
   //!총 매수가격 구하기 대작전       (보유수량  X  매수평균가)
   const buyList = [];
@@ -154,20 +153,28 @@ const Info = () =>{
               <article>
                   <div>
                       <h4>평가손익</h4>
-                      <p>{total_loss}</p>
+                      {total_loss < 0 ? (
+                        <p style={{color:"#464BF2"}}>{total_loss}</p>
+                      ):(
+                        <p style={{color:"#E85A43"}}>{total_loss}</p>
+                      )}
+                      
                   </div>
                   <div>
                     <h4>수익률</h4>
-                    <p>{revenue}</p>
+                      {revenue < 0 ? (
+                        <p style={{color:"#464BF2"}}>{revenue}</p>
+                      ):(
+                        <p style={{color:"#E85A43"}}>{revenue}</p>
+                      )}
+                   
                   </div>
                 
               </article>
             </div>
           </section>
     {/* 오른쪽 총 보유자산 부분 */}
-          <section>
-
-          </section>
+    <AutoTrade></AutoTrade>    
         </ContentBox>
         <ListBox>
           <header><Title>보유자산 목록</Title></header>
@@ -186,11 +193,17 @@ const Info = () =>{
                 infoArr.map((value,idx)=>(
                   <div key={idx} className="column-item">
                     <div style={{width:"4%"}}>{value.coinName}</div>
-                    <div style={{width:"20%",textAlign:"center"}}>{value.count}</div>
-                    <div style={{width:"10%",textAlign:"center"}}>{value.buyAvg}</div>
-                    <div style={{width:"10%",textAlign:"center"}}>{value.buyPrice}</div>
-                    <div style={{width:"10%",textAlign:"center"}}>{value.tradePrice}</div>
-                    <div style={{width:"10%",textAlign:"center"}}>{value.lossPrice}</div>
+                    <div style={{width:"20%",textAlign:"right"}}>{value.count}&nbsp;<span style={{fontSize:"12px"}}>{value.coinName}</span></div>
+                    <div style={{width:"10%",textAlign:"right"}}>{value.buyAvg}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
+                    <div style={{width:"10%",textAlign:"right"}}>{value.buyPrice}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
+                    <div style={{width:"10%",textAlign:"right",fontWeight:"bold",background:""}}>{value.tradePrice}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
+                    {/* 금액이 음수일떄는 파란색으로 출력 */}
+                    {value.lossPrice < 0 ? (
+                      <div style={{width:"10%",textAlign:"right",color:"#464BF2"}}>{value.lossPrice}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
+                    ):(
+                      <div style={{width:"10%",textAlign:"right",color:"#E85A43"}}>{value.lossPrice}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
+                    )}
+                    
                   </div>
                 ))
               }
@@ -309,6 +322,11 @@ const ListBox = styled.div`
     .table-wrapper{
       display: grid;
       grid-template-columns: 8 1fr;
+      overflow-y: scroll;
+      ::-webkit-scrollbar {
+        display:none /* Chrome , Safari , Opera */
+      }
+      
     }
     .column-title{
       display: flex;
@@ -329,6 +347,8 @@ const ListBox = styled.div`
       border-radius: 2px;
       border-bottom: 1px solid lightgray;
      // border:1px solid black;
+      
+      
       & > div{
         
       }
