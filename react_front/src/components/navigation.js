@@ -36,7 +36,7 @@ const Navigation = () =>{
         <li><Link to="/info">투자내역</Link></li>
         <li><Link to="/news">뉴스</Link></li>
         {/* <li><Link to="/board">게시판</Link></li> */}
-        <li><a href="http://localhost:5858/player">영상</a></li>
+        <li><Link to="/video">영상</Link></li>
       </Ul>
     </>
   )
