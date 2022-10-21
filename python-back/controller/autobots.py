@@ -77,5 +77,5 @@ def autobot (accessKey, secretKey, marketCode, capital):
 				except Exception as x:
 							print(x)
 
-							time.sleep(2)
+							time.sleep(30)
 
