@@ -1,8 +1,9 @@
 from crypt import methods
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, escape
 from controller import trade
 from controller import autobots
 from flask_cors import CORS
+from news_data.newsCrawling.py import newsAdd
 from controller.stockInfo import stock
 from controller.coinInfo import coin
 from controller.predict import machineLearn
@@ -71,7 +72,10 @@ def autobot():
    capital = data['capital']
    return autobots.autobot(accessKey, secretKey, marketCode, capital)
    
-
+@app.route('/', methods=['POST'])
+def hello():
+   data = request.get_json()
+   return jsonify(newsAdd())
 
 if __name__ == '__main__':  
    app.run('127.0.0.1',port=5959,debug=True)
