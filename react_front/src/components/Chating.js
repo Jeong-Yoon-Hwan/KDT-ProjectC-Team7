@@ -5,14 +5,22 @@ import useInput from "../hooks/useInput";
 import messageStyle from "../common/chatMessageStyle";
 import alarmStyle from "../common/alarmMessageStyle";
 
-
 const ws = new WebSocket("ws://localhost:3001");
 
-
 const Chating = () => {
+
+  const date = new Date();
+    const hours = date.getHours();
+    const minutes = date.getMinutes();
+    const seconds = date.getSeconds();
+    const time = (String(hours).padStart(2,'0')+":"+String(minutes).padStart(2,'0')+":"+String(seconds).padStart(2,'0'))
+
+
+
   const inputRef = useRef();
   const clearInput = () =>{
     inputRef.current.value="";
+    chat.setValue("");
   }
 
   const MessageBox = useRef("");  //! 메세지가 표시되는 박스
@@ -49,14 +57,20 @@ const Chating = () => {
           let chat = document.createElement("div")
           let message = document.createTextNode(text[i]);
           
+
+          
           let nameBox = document.createElement("div")
           nameBox.textContent = nickname[i];
           chatBox.appendChild(nameBox)
+
+          let timeBox = document.createElement("span");
+          timeBox.textContent= time;
           
-          messageStyle(chatBox,chat,nameBox,nickname[i],localStorage.getItem('nickname'))
+          messageStyle(chatBox,chat,nameBox,timeBox,nickname[i],localStorage.getItem('nickname'))
           
           chat.appendChild(message)
           chatBox.appendChild(chat);
+          chatBox.appendChild(timeBox);
           
           MessageBox.current.appendChild(chatBox)
         }
@@ -85,11 +99,16 @@ const Chating = () => {
 
     chatBox.appendChild(nameBox)
 
+    //* 시간표시
+    const timeBox = document.createElement("div")
+    timeBox.textContent =msg.time;
+
+
     //* 메세지 타입이 "message" 일때
     if(msg.type==="message"){
       //* 채팅박스 스타일 지정 >> 일단 함수로 만들어놨음..
       //messageStyle(chat,msg.nickname,localStorage.getItem("nickname"));
-      messageStyle(chatBox,chat,nameBox,msg.nickname,localStorage.getItem("nickname"));
+      messageStyle(chatBox,chat,nameBox,timeBox,msg.nickname,localStorage.getItem("nickname"));
     }else {
       alarmStyle(chat);
     }
@@ -101,6 +120,9 @@ const Chating = () => {
     MessageBox.current.appendChild(chat)
     chatBox.appendChild(chat);
 
+    //* 시간을 채팅박스에 추가
+    chatBox.appendChild(timeBox)
+
     //채팅박스에 메세지를 추가함
     MessageBox.current.appendChild(chatBox)
   }
@@ -108,12 +130,19 @@ const Chating = () => {
   
   const chat = useInput();
 
-//*=========================메시지 받기 끝==========================================
+  //*=========================메시지 받기 끝==========================================
 
 
   //?====================보내기 버튼 눌렀을때 채팅내용 담은 박스 생성====================================
   const onSubmit = () =>{  
     
+    
+
+    if(chat.value===""){
+      // 채팅 안쳤을때
+      clearInput();
+      return false;
+    }
     //인풋에 입력한 값을 message로 전송
     const message = chat.value;
 
@@ -135,20 +164,20 @@ const Chating = () => {
     const msg = {
       type:"message",
       text:message,
-      nickname: localStorage.getItem("nickname")
+      nickname: localStorage.getItem("nickname"),
+      time : time
     }
 
     //* 객체형태로 웹소켓에 전송
     
       ws.send(JSON.stringify(msg));
     
-    
-    
     const inputValue = document.getElementById("chat");
     
     if(inputValue.value===""){
       alert("채팅 안치셨어요");
       clearInput();
+      return false;
     }else{
     }
     clearInput();
@@ -204,17 +233,18 @@ const Alarm = styled.div`
 const MainBox = styled.div`
   width:inherit ;
   height:90vh;
-  
+  box-shadow: 4px 4px 20px gray;
   //메인채팅창//
   & > main {
     position:relative;
     width: inherit;
     height:calc(100% - 50px);
-    background-color:#f1f1f1;
+    background-color:gray;
     display:flex;
     flex-direction:column;
     justify-content:end;
     overflow:hidden;
+    
 
       //전체 채팅박스
       & > div {
@@ -241,6 +271,7 @@ const MainBox = styled.div`
         outline:none;
         width:90%;
         height:inherit;
+        background-color: #f1f1f1;
       }
 
       & > button {
