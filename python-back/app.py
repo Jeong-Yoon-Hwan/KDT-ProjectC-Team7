@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, jsonify, escape
 from controller import trade
 from controller import autobots
 from flask_cors import CORS
-from news_data.newsCrawling.py import newsAdd
+from news_data.newsCrawling import newsAdd
 from controller.stockInfo import stock
 from controller.coinInfo import coin
 from controller.predict import machineLearn
