@@ -1,4 +1,3 @@
-from crypt import methods
 from flask import Flask, render_template, request, jsonify, escape
 from controller import trade
 from controller import autobots
