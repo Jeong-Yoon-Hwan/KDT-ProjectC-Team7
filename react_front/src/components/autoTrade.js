@@ -62,7 +62,9 @@ export default AutoTrade;
 
 const Container = styled.div`
   width:30vw;
+  min-width: 500px;
   height:inherit;
+  min-height: 240px;
   border-radius: 2px;
   background-color: #333333;
   box-shadow: 4px 4px 20px gray;

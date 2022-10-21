@@ -219,13 +219,15 @@ export default Info;
 
 const Container = styled.div`
   width:80%;
-  min-width: 1020px;
+  //min-width: 1020px;
   height:80%;
+ 
   //background-color: beige;
   & > section{
     display:flex;
     flex-direction: column;
     gap:30px;
+    
     
   }
 `
@@ -240,6 +242,7 @@ const Title = styled.div`
 const ContentBox = styled.div`
   width:100%;
   height:25vh;
+  min-height: 240px;
   background-color: white;
   display: flex;
   justify-content: space-between;
@@ -260,9 +263,10 @@ const ContentBox = styled.div`
     & > div{
       display: flex;
       flex-direction:column;
-      gap:20px;
+      gap:50px;
       width:50%;
       height:inherit;
+      padding-top:20px;
       //background-color: white;
       
       
