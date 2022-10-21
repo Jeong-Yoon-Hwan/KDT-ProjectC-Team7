@@ -1,5 +1,7 @@
+from crypt import methods
 from flask import Flask, render_template, request, jsonify
 from controller import trade
+from controller import autobots
 from flask_cors import CORS
 from controller.stockInfo import stock
 from controller.coinInfo import coin
@@ -59,6 +61,16 @@ def cancel_order():
    secretKey = data['secretKey']
    uuid = data['uuid']
    return trade.cancel_order(accessKey, secretKey, uuid)
+
+@app.route('/autobot', methods=['POST'])
+def autobot():
+   data = request.get_json()
+   accessKey = data['accessKey']
+   secretKey = data['secretKey']
+   marketCode = data['marketCode']
+   capital = data['capital']
+   return autobots.autobot(accessKey, secretKey, marketCode, capital)
+   
 
 
 if __name__ == '__main__':  
