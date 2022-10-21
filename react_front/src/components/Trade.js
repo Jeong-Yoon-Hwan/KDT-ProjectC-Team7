@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useInput from "../hooks/useInput";
 
-const AutoTrade = () =>{
+const Trade = () =>{
 
   // *useInput Hook 사용
   const AccessKey = useInput();
@@ -50,14 +50,14 @@ const AutoTrade = () =>{
           <input type="text" placeholder="자본금을 입력하세요" value={Capital.value} onChange={Capital.onChange}/>
       </section>
       <footer>
-        <Button>저장</Button>
+        <Button>실행</Button>
         <Button color="#E85A43" onClick={InputClear}>취소</Button>
       </footer>
     </Container>    
   )
 }
 
-export default AutoTrade;
+export default Trade;
 
 
 const Container = styled.div`

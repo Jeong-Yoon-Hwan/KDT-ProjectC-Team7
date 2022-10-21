@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import currentPrices from "../common/currentPrice";
-import AutoTrade from "../components/autoTrade";
+import Trade from "../components/Trade";
 
 const Info = () =>{
   purchaseData();
@@ -120,7 +120,7 @@ const Info = () =>{
     <Container>
       <section>
         <header>
-          <Title>보유자산</Title>
+          <Title>보유자산 & 매매</Title>
         </header>
         <ContentBox>
           {/* 왼쪽 보유 KRW 부분 */}
@@ -174,10 +174,10 @@ const Info = () =>{
             </div>
           </section>
     {/* 오른쪽 총 보유자산 부분 */}
-    <AutoTrade></AutoTrade>    
+    <Trade></Trade>    
         </ContentBox>
         <ListBox>
-          <header><Title>보유자산 목록</Title></header>
+          <header><Title>보유자산 리스트</Title></header>
           <section>
           <div className="table-wrapper">
               <div className="column-title">

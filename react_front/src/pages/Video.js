@@ -22,7 +22,7 @@ const Video = () =>{
 
   return(
     <Container>
-      <iframe src="http://localhost:5858/player" style={{width:"80vw",height:"80vh",padding:"50px"}}></iframe>
+      <iframe src="http://localhost:5858/player" width="1100" height="800"></iframe>
     </Container>
   )
 }
