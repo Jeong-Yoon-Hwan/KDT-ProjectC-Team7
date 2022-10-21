@@ -96,6 +96,9 @@ const MainContainer = styled.div`
     padding : 20px;
     overflow-y: scroll;
     position: relative;
+    ::-webkit-scrollbar {
+	    display:none /* Chrome , Safari , Opera */
+    }
     
   }
 `
