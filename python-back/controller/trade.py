@@ -1,8 +1,8 @@
 import os
-from dotenv import load_dotenv
-load_dotenv()
-access_key = os.environ['ACCESS_KEY']
-secret_key = os.environ['SECRET_KEY']
+# from dotenv import load_dotenv
+# load_dotenv()
+# access_key = os.environ['ACCESS_KEY']
+# secret_key = os.environ['SECRET_KEY']
 
 def buy_order(accessKey, secretKey, marketCode, price):
 		from pyupbit.exchange_api import Upbit

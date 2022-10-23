@@ -1,4 +1,4 @@
-# 소스 배포용
+# 소스 배포용 , 자동매매 돌릴 종목을 미리 5000원 매수 후에 동작시켜야함
 
 import datetime as dt
 start_time = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -8,28 +8,41 @@ while True:
 				import time
 				import pyupbit
 				import pandas as pd
+				import threading
 	
 				from pyupbit.exchange_api import Upbit
 				
 				access_key = '' # 업비트 엑세스 키 
 				secret_key = '' # 업비트 시크릿 키				
 				marketCode = 'KRW-XRP' # 마켓코드 적을 것.
-				startCapital = 100000 # 12000원 이상 입금해야 함.
+				startCapital = 11500 # 12000원 이상 입금해야 함.
 				upbit = Upbit(access_key, secret_key)	
-				########################################################################
+				#####################################################################
 				df = pyupbit.get_ohlcv(marketCode, 'day', 3)
+				real_time_price = pyupbit.get_current_price(marketCode) ## 실시간 현재가격
 				df = df.astype(int)
+				print(real_time_price)
 				get_balance = upbit.get_balances()
 				balance_all = pd.DataFrame(get_balance)
 				balance_all.drop(['locked', 'avg_buy_price_modified', 'unit_currency'], axis =1 ,inplace=True)
 				balance_all.reset_index
+				# print(balance_all)
 				currentCapital = balance_all.iat[0,1] # 현재 잔고(KRW) > 5000 일때 거래 가능
-				avg_buy_price = balance_all.iat[1,2] # 코인 평균 매수 가격
-				owned_balance = balance_all.iat[1,1] ## 현재 보유 코인 수량
+				# avg_buy_price = balance_all.iat[1,2] # 코인 평균 매수 가격
+				# if balance_all.iat[1,2].empty:
+				# 	avg_buy_price = None
+				avg_buy_price=balance_all.iat[1,2]
+				# owned_balance = balance_all.iat[1,1] ## 현재 보유 코인 수량
+				# if balance_all.iat[1,1].empty:
+				# 	owned_balance = None 
+				owned_balance = balance_all.iat[1,1] 
+					
+
+				# print(currentCapital)
+				# print(avg_buy_price)
+				# print(owned_balance)
 				capital_value = round(float(avg_buy_price) * float(owned_balance)) # 코인 현재 가치(KRW) > 5000 일때 거래 가능
-			
-				
-				real_time_price = pyupbit.get_current_price(marketCode) ## 실시간 현재가격
+							
 				yesterday = df.iloc[-2]
 				today = df.iloc[-1]
 				start_time = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -54,7 +67,7 @@ while True:
 				condition_increase = int(float(avg_buy_price) * 1.03)
 				condition_decrease = int(float(avg_buy_price) - (float(avg_buy_price) * 0.03))
 				target_sell = ((condition_increase < real_time_price) or condition_decrease > real_time_price) ## 매도 조건
-				print(real_time_price)
+				# print(real_time_price)
 				if ((float(currentCapital)> 5000) and (target_buy == True)):
 						upbit.buy_market_order(marketCode, currentCapital) # 잔고 전부 매수 #
 				if ((float(capital_value))>5000 and (target_sell == True)):		
@@ -69,8 +82,8 @@ while True:
 				## 자동매매 시작 후, 24시간이 지나면 break
 				if (start_time > end_time):
 						break
+				time.sleep(5)
+				
 		except Exception as x:
 					print(x)
-
-					time.sleep(2)
 
