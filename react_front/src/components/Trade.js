@@ -39,6 +39,21 @@ const Trade = () =>{
     
   }
 
+  const buyOrder = () =>{
+    axios.post("http://localhost:5959/buy_order",
+      {
+        accessKey : "",
+        secretKey : "",
+        marketCode : "KRW-DOGH",
+        price : "1000"
+      }
+    ).then((res)=>{
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
   return(
     <Container>
       <section>
@@ -50,7 +65,7 @@ const Trade = () =>{
           <input type="text" placeholder="자본금을 입력하세요" value={Capital.value} onChange={Capital.onChange}/>
       </section>
       <footer>
-        <Button>실행</Button>
+        <Button onClick={buyOrder}>실행</Button>
         <Button color="#E85A43" onClick={InputClear}>취소</Button>
       </footer>
     </Container>    
