@@ -1,4 +1,4 @@
-# 소스 배포용
+# 소스 배포용 , 자동매매 돌릴 종목을 미리 5000원 매수 후에 동작시켜야함
 
 import datetime as dt
 start_time = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -16,7 +16,7 @@ while True:
 				marketCode = 'KRW-XRP' # 마켓코드 적을 것.
 				startCapital = 11500 # 12000원 이상 입금해야 함.
 				upbit = Upbit(access_key, secret_key)	
-				########################################################################
+				#####################################################################
 				df = pyupbit.get_ohlcv(marketCode, 'day', 3)
 				real_time_price = pyupbit.get_current_price(marketCode) ## 실시간 현재가격
 				df = df.astype(int)
