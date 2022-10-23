@@ -1,6 +1,6 @@
 import React, { createElement, useRef, useState } from "react";
 import styled from "styled-components";
-import jsonData from "../news_data/news.json";
+import jsonData from "../../../python-back/news_data/news.json";
 import NewsMainText from "../components/NewsMainText";
 import axios from "axios"
 
@@ -11,7 +11,7 @@ const News = () =>{
 
   //뉴스 새로고침
   const newsRefresh = () =>{
-    axios.post("http://127.0.0.1:5000",
+    axios.post("http://127.0.0.1:5959",
     {
       "name" : "hello",
     }
