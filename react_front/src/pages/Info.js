@@ -10,8 +10,8 @@ const Info = () =>{
   function purchaseData(){
     axios.post("http://localhost:5858/trade/account",
       {
-        accessKey : "uv499rjhICcrRJYn2W1auuDlVP7Vdwx9z6Z3DPxm",
-        secretKey : "r5uPxxmfSrWL8gX7M8rvUrcdBqJUXMuNBiaqmcAz"
+        accessKey : "",
+        secretKey : ""
       },
       {
         headers :{
@@ -218,9 +218,12 @@ const Info = () =>{
 export default Info;
 
 const Container = styled.div`
-  width:80%;
+display: flex;
+justify-content: center;
+
+  width:80vw;
   //min-width: 1020px;
-  height:80%;
+  height:80vh;
  
   //background-color: beige;
   & > section{

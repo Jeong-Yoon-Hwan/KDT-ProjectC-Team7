@@ -38,16 +38,23 @@ const Trade = () =>{
     setCoinName("");
     
   }
-
+  
+  
   const buyOrder = () =>{
     axios.post("http://localhost:5959/buy_order",
       {
-        accessKey : "",
-        secretKey : "",
+        accessKey : "TJWKTIItRVfprh0z4jhSU1xCxGW6eSPi34SntbZV",
+        secretKey : "JClYciuVVaxymBbIKaSRB8Em50xz0KcnxIwqbS2Z",
         marketCode : "KRW-DOGH",
-        price : "1000"
+        price : "1000",
+      },{
+        headers: {
+          "Content-Type": `application/json`,
+        },
       }
+      
     ).then((res)=>{
+      
       console.log(res)
     }).catch((err)=>{
       console.log(err)
