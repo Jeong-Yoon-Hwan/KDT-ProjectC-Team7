@@ -37,5 +37,5 @@ export const upload = multer({
 });
 
 export const uploadConfirm = async (req, res) => {
-  res.status(200).json(req.file);
+  res.status(200).json('업로드가 완료됐습니다');
 };
