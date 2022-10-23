@@ -74,8 +74,9 @@ def autobot (accessKey, secretKey, marketCode, capital):
 						## 자동매매 시작 후, 24시간이 지나면 break
 						if (start_time > end_time):
 								break
+						time.sleep(10)
 				except Exception as x:
 							print(x)
 
-							time.sleep(30)
+							
 
