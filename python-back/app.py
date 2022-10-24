@@ -76,7 +76,6 @@ def autobot():
    
 @app.route('/', methods=['GET'])
 def hello():
-   # data = request.get_json()
    return jsonify(newsAdd())
 
 if __name__ == '__main__':  
