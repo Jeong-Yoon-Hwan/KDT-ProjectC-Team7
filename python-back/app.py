@@ -52,7 +52,7 @@ def sell_order():
    secretKey = data['secretKey']
    marketCode = data['marketCode']
    volume = str(data['volume'])
-   ress = trade.sell_order(accessKey, secretKey, marketCode, volume)
+   trade.sell_order(accessKey, secretKey, marketCode, volume)
    return jsonify({'주문 결과': '매도 완료'})
 
 @app.route('/cancel_order', methods=['POST'])
