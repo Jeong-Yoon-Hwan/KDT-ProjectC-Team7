@@ -7,7 +7,8 @@ import authRouter from './router/auth.js'; // 로그인, 회원관리
 import chatRouter from './router/chat.js'; // 채팅
 import uploadRouter from './router/upload.js'; // 파일(앱, 동영상, 음악) 업로드
 import playerRouter from './router/player.js'; // 동영상 재생
-import tradeRouter from './router/trade.js'; // 가상화폐 매매
+import tradeRouter from './router/trade.js'; // 가상화폐 매매 정보
+import download from './router/download.js'; // 다운로드
 import { config, corsOptions } from './config/config.js';
 import { sqz } from './database/mysql.js';
 import { webSocket } from './controller/websocket.js';
@@ -23,6 +24,7 @@ app.use(morgan('dev')); // 배포환경이면 'combined'로 설정, 접속자의
 app.use('/auth', authRouter);
 app.use('/chat', chatRouter);
 app.use('/upload', uploadRouter);
+app.use('/download', download);
 app.use('/player', playerRouter);
 app.use('/trade', tradeRouter);
 

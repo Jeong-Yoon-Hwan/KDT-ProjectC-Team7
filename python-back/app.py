@@ -5,7 +5,7 @@ from flask_cors import CORS
 from news_data.newsCrawling import newsAdd
 from controller.stockInfo import stock
 from controller.coinInfo import coin
-from controller.predict import machineLearn
+
 
 app = Flask(__name__)
 CORS(app)
@@ -13,9 +13,10 @@ CORS(app)
 def error__handling_500(error):
    return jsonify({'Error':'Internal 500 error'},500)
 
-@app.route('/predict', methods=['GET'])
-def predict_learn():
-   return machineLearn()
+# 머신러닝 몇 번 실행하면 서버가 다운될 수 있으므로, 서버 연결 끊음
+# @app.route('/predict', methods=['GET']) 
+# def predict_learn():
+#    return machineLearn()
 
 @app.route('/info_stock', methods=['POST'])
 def info_stock():
@@ -41,8 +42,8 @@ def buy_order():
    secretKey = data['secretKey']
    marketCode = data['marketCode']
    price = int(data['price'])
-   trade.buy_order(accessKey, secretKey, marketCode, price)
-   return jsonify({'주문 결과' : '매수 완료'})
+   ress = trade.buy_order(accessKey, secretKey, marketCode, price)
+   return jsonify({}, 200)
 
 
 @app.route('/sell_order', methods=['POST'])
@@ -52,7 +53,7 @@ def sell_order():
    secretKey = data['secretKey']
    marketCode = data['marketCode']
    volume = str(data['volume'])
-   trade.sell_order(accessKey, secretKey, marketCode, volume)
+   ress = trade.sell_order(accessKey, secretKey, marketCode, volume)
    return jsonify({'주문 결과': '매도 완료'})
 
 @app.route('/cancel_order', methods=['POST'])

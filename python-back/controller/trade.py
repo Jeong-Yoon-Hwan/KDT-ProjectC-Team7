@@ -7,19 +7,21 @@ import os
 def buy_order(accessKey, secretKey, marketCode, price):
 		from pyupbit.exchange_api import Upbit
 		upbit = Upbit(accessKey, secretKey)
-		upbit.buy_market_order(marketCode, price)
-		
+		result = upbit.buy_market_order(marketCode, price)
+		print(result)
 
 def sell_order(accessKey, secretKey, marketCode, volume):
 		from pyupbit.exchange_api import Upbit
 		upbit = Upbit(accessKey, secretKey)
-		upbit.sell_market_order(marketCode, volume)
+		result = upbit.sell_market_order(marketCode, volume)
+		print(result)
 			
 
 def cancel_order(accessKey, secretKey, uuid):
 		from pyupbit.exchange_api import Upbit
 		upbit = Upbit(accessKey, secretKey)
-		upbit.cancel_order(str(uuid))
+		result = upbit.cancel_order(str(uuid))
+		print(result)
 
 
 
