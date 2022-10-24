@@ -34,6 +34,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
+    "arkit": "^1.6.4",
     "nodemon": "^2.0.19"
   }
 }

@@ -32,7 +32,7 @@
     <script type="text/javascript">
       function download() {
         axios
-          .get('http://127.0.0.1:5858/download', {
+          .get('http://127.0.0.1:5858/download/autobot', {
             responseType: 'blob',
           })
           .then((res) => console.log('다운로드 성공'));
