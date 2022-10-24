@@ -35,7 +35,18 @@
           .get('http://127.0.0.1:5858/download/autobot', {
             responseType: 'blob',
           })
-          .then((res) => console.log('다운로드 성공'));
+          .then((res) => {
+            const blob = new Blob([res.data]);
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.style.display = 'none';
+            link.download = 'autoBot.py';
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+          });
       }
     </script>
   </body>
