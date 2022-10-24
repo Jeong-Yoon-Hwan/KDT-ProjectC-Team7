@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 const Video = () =>{
 
-  axios.get("http://localhost:5858/player/",
+  axios.post("http://localhost:5858/player/",
     {
       headers :{
         Authorization : `Bearer ${localStorage.getItem("token")}`
