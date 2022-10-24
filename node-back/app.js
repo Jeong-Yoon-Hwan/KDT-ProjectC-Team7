@@ -9,6 +9,7 @@ import uploadRouter from './router/upload.js'; // 파일(앱, 동영상, 음악)
 import playerRouter from './router/player.js'; // 동영상 재생
 import tradeRouter from './router/trade.js'; // 가상화폐 매매 정보
 import download from './router/download.js'; // 다운로드
+import chartRouter from './router/chart.js'; // 차트
 import { config, corsOptions } from './config/config.js';
 import { sqz } from './database/mysql.js';
 import { webSocket } from './controller/websocket.js';
@@ -27,6 +28,7 @@ app.use('/upload', uploadRouter);
 app.use('/download', download);
 app.use('/player', playerRouter);
 app.use('/trade', tradeRouter);
+app.use('/chart', chartRouter);
 
 app.use((error, req, res, next) => {
   console.error(error);
