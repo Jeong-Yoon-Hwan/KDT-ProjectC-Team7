@@ -31,7 +31,7 @@ const Navigation = () =>{
     <>
     {/* 링크 값 입력되면 라우터 페이지에서 받아서 처리됨 */}
       <Ul>
-        <li><Link to="/">거래소</Link></li>
+        <li><Link to="/">가상화폐 순위</Link></li>
         <li><Link to="/trading">차트 조회</Link></li>
           <li><Link to="/infokey">투자내역</Link></li>
         <li><Link to="/news">뉴스</Link></li>

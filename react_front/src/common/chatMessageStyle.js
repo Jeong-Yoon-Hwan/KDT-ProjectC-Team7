@@ -32,6 +32,7 @@ const messageStyle = (main,chat,name,time,repotimeBox,typeCompare,compareValue) 
   name.style.padding="5px";  
   name.style.fontSize="13px";
   name.style.fontWeight="bold";
+  
 
   chat.style.width="max-content";
   chat.style.maxWidth="200px";
