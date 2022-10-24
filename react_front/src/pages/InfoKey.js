@@ -7,6 +7,8 @@ import { SwitchLayoutGroupContext } from "framer-motion";
 const InfoKey = () =>{
   if(localStorage.getItem("accessKey")!==null){
     location.href="http://localhost:8000/info"
+  }else{
+    
   }
   const [accessKey,setAccessKey] = useState("");
   const accessKeyHandle = (e) =>{
