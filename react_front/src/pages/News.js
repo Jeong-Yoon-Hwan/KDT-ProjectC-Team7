@@ -11,7 +11,7 @@ const News = () =>{
 
   //뉴스 새로고침
   const newsRefresh = () =>{
-    axios.post("http://127.0.0.1:5959",
+    axios.get("http://127.0.0.1:5959",
     {
       "name" : "hello",
     }
