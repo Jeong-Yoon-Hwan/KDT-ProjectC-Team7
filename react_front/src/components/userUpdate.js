@@ -4,7 +4,7 @@ import styled from "styled-components";
 import axios from "axios";
 import useInput from "../hooks/useInput";
 import swal from "sweetalert";
-
+import { motion } from "framer-motion"
 
 function UserUpdate({ setModalOpen }) {
     const closeModal = () =>{
@@ -64,7 +64,7 @@ function UserUpdate({ setModalOpen }) {
       emailDisable ? setEmailDisable(false) : setEmailDisable(true);
     }
     return(
-      
+    <motion.div className="registerPage" initial={{opacity:0}} animate={{opacity:1,transition:"2s"}} exit={{opacity:0}}>
       <Container>
         <header>
           <div>회원정보 수정</div>
@@ -122,6 +122,7 @@ function UserUpdate({ setModalOpen }) {
         </footer>
       
       </Container>
+    </motion.div>
     )
 }
 
@@ -129,7 +130,7 @@ export default UserUpdate;
 
 const Container = styled.div`
   color:white;
-  width:349px;
+  width:400px;
   height:500px;
   border: 0;
   z-index: 999;
@@ -137,7 +138,8 @@ const Container = styled.div`
   top:50%;  
   left:50%;
   transform: translate(-50%,-50%);
-  background-color: rgba(51,51,51,0.85);
+//background-color: rgba(51,51,51,0.85);
+  background-color: #333;
   border-radius: 8px;
   
   //* 헤더

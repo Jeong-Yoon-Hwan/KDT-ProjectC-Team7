@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import styled from "styled-components";
 import axios from "axios";
 import swal from "sweetalert";
-
+import { motion } from "framer-motion"
 
 const UserDelete = ({setUserDeleteOpen}) =>{
   const closeModal = () =>{
@@ -43,6 +43,7 @@ const UserDelete = ({setUserDeleteOpen}) =>{
     })
   }
   return(
+  <motion.div className="registerPage" initial={{opacity:0}} animate={{opacity:1,transition:"2s"}} exit={{opacity:0,transition:"2s"}}>
     <Container>
       <header>회원탈퇴</header>
       <main>
@@ -58,6 +59,7 @@ const UserDelete = ({setUserDeleteOpen}) =>{
         <button onClick={closeModal}>취소</button>
       </main>
     </Container>
+  </motion.div>
   )
 }
 
@@ -74,7 +76,8 @@ const Container = styled.div`
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
-  background-color: rgba(51,51,51,0.85);
+  //background-color: rgba(51,51,51,0.85);
+  background-color: #333;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
