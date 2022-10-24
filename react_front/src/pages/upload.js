@@ -20,7 +20,7 @@ const Upload = () =>{
 
   return(
     <Container>
-      <iframe src="http://localhost:5858/upload/upup" width="1100" height="800"></iframe>
+      <iframe src="http://localhost:5858/upload/upup" width="100%" height="100%"></iframe>
     </Container>
 
   )
@@ -29,6 +29,11 @@ const Upload = () =>{
 export default Upload;
 
 const Container = styled.div`
+  position: relative;
   width:100%;
   height:100%;
+  & > iframe {
+    position: absolute;
+    
+  }
 `

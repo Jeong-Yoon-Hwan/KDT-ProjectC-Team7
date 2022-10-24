@@ -40,6 +40,8 @@ const Navigation = () =>{
         {localStorage.getItem("nickname") === "admin" ? (
           <li><Link to="upload">업로드</Link></li>
         ):(null)}
+
+        <li><Link to="/download">다운로드</Link></li>
         
       </Ul>
     </>
