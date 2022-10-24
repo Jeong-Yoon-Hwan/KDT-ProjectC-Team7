@@ -64,7 +64,7 @@ const Chating = () => {
           chatBox.appendChild(nameBox)
 
           let timeBox = document.createElement("span");
-          timeBox.textContent= time;
+          timeBox.textContent= writeTime[i];
           
           messageStyle(chatBox,chat,nameBox,timeBox,nickname[i],localStorage.getItem('nickname'))
           

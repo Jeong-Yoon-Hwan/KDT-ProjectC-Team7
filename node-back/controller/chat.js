@@ -1,5 +1,6 @@
 import * as chatDb from '../data/chat.js';
 import * as userDb from '../data/auth.js';
+import { getTime } from '../src/getToday.js';
 
 export async function allNickM(req, res) {
   const nickname = req.body.nickname;
@@ -18,7 +19,8 @@ export async function sendText(req, res, next) {
     const newM = await chatDb.sendText({
       nickname,
       text,
-      writeTime: Date().toString(),
+      //writeTime: Date().toString(),
+      writeTime : getTime(),
       repoTime: Date.now().toString(),
     });
     return res.status(200).json(newM);
