@@ -6,8 +6,8 @@ import useInput from "../hooks/useInput";
 const Trade = () =>{
 
   // *useInput Hook 사용
-  const AccessKey = useInput();
-  const SecretKey = useInput();
+  //const AccessKey = useInput();
+  //const SecretKey = useInput();
   const Capital = useInput();
   
   const [CoinName,setCoinName] = useState("");
@@ -43,10 +43,10 @@ const Trade = () =>{
   const buyOrder = () =>{
     axios.post("http://localhost:5959/buy_order",
       {
-        accessKey : "TJWKTIItRVfprh0z4jhSU1xCxGW6eSPi34SntbZV",
-        secretKey : "JClYciuVVaxymBbIKaSRB8Em50xz0KcnxIwqbS2Z",
-        marketCode : "KRW-DOGH",
-        price : "1000",
+        accessKey : localStorage.get("accessKey"),
+        secretKey : localStorage.get("secretKey"),
+        marketCode : CoinName,
+        price : Capital.value,
       },{
         headers: {
           "Content-Type": `application/json`,
@@ -63,10 +63,10 @@ const Trade = () =>{
 
   return(
     <Container>
-      <section>
-          <input type="text" placeholder="AccessKey를 입력하세요" value={AccessKey.value} onChange={AccessKey.onChange}/>
-          <input type="text" placeholder="SecretKey를 입력하세요" value={SecretKey.value} onChange={SecretKey.onChange}/>
-      </section>
+      {/* <section>
+          <input type="text" placeholder="AccessKey를 입력하세요" />
+          <input type="text" placeholder="SecretKey를 입력하세요" />
+      </section> */}
       <section>
           <input type="text" placeholder="코인명을 입력하세요" value={CoinName} onChange={coinHandle}/>
           <input type="text" placeholder="자본금을 입력하세요" value={Capital.value} onChange={Capital.onChange}/>

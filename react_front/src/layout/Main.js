@@ -9,6 +9,7 @@ import Info from '../pages/Info.js';
 import Board from '../pages/board.js';
 import Video from '../pages/Video.js';
 import Upload from '../pages/upload.js';
+import InfoKey from '../pages/InfoKey.js';
 
 const MainBox = styled.div`
   display: flex;
@@ -34,6 +35,7 @@ const Main = (props) => {
             <Route path="/board" element={<Board/>}></Route>
             <Route path="/video" element={<Video/>}></Route>
             <Route path="/upload" element={<Upload/>}></Route>
+            <Route path='/infokey' element={<InfoKey/>}></Route>
           </Routes>
         </MainBox>
       </BrowserRouter>

@@ -10,8 +10,8 @@ const Info = () =>{
   function purchaseData(){
     axios.post("http://localhost:5858/trade/account",
       {
-        accessKey : "",
-        secretKey : ""
+        accessKey : localStorage.getItem("accessKey"),
+        secretKey : localStorage.getItem("secretKey")
       },
       {
         headers :{
@@ -120,7 +120,15 @@ const Info = () =>{
     <Container>
       <section>
         <header>
-          <Title>보유자산 & 매매</Title>
+          <Title>
+            보유자산 & 매매
+            <button onClick={()=>{
+              localStorage.removeItem("accessKey");
+              localStorage.removeItem("secretKey");
+              location.href="http://localhost:8000/infokey";
+            }}>업비트 키 재입력</button>
+          </Title>
+          
         </header>
         <ContentBox>
           {/* 왼쪽 보유 KRW 부분 */}
@@ -235,11 +243,23 @@ justify-content: center;
   }
 `
 const Title = styled.div`
-  width:max-content;
+  width:100%;
   height:max-content;
   padding:10px;
   border-left: 3px solid #464BF2;
   font-weight:bold;
+  display: flex;
+  justify-content: space-between;
+
+  & > button{
+      width:228px;
+      height:20px;
+      background:${props => props.color || "#464BF2"};
+      color:white;
+      border:0;
+      border-radius:2px;
+      font-weight:bold;
+  }
 `
 
 const ContentBox = styled.div`
@@ -366,3 +386,6 @@ const ListBox = styled.div`
     } */
   }
 `
+
+     
+    
