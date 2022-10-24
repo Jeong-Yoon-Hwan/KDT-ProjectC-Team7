@@ -26,6 +26,8 @@ const Chating = () => {
   const MessageBox = useRef("");  //! 메세지가 표시되는 박스
   const AlarmBox = useRef("");    //! 알림이 표시되는 박스
   
+  
+
   window.onload = () =>{
     reloadMessage();
   }
@@ -35,6 +37,7 @@ const Chating = () => {
     let text = []; //? 메세지 내용
     let nickname = []; //? 유저닉네임
     let writeTime = []; //? 보낸시간
+    let repotime = [];
     
     axios.get("http://localhost:5858/chat",
       {
@@ -50,6 +53,8 @@ const Chating = () => {
           text.push(res.data[i].text)
           nickname.push(res.data[i].nickname)
           writeTime.push(res.data[i].writeTime)
+          repotime.push(res.data[i].repoTime)
+          
         }
       //* DB에 저장된 메시지의 개수만큼 반복하여 메시지 박스를 화면에 출력
         for(let i=0;i<text.length;i++){
@@ -57,22 +62,46 @@ const Chating = () => {
           let chat = document.createElement("div")
           let message = document.createTextNode(text[i]);
           
-
-          
           let nameBox = document.createElement("div")
           nameBox.textContent = nickname[i];
           chatBox.appendChild(nameBox)
 
           let timeBox = document.createElement("span");
           timeBox.textContent= writeTime[i];
+
+          let repotimeBox = document.createElement("sapn");
+          repotimeBox.textContent = repotime[i];
           
-          messageStyle(chatBox,chat,nameBox,timeBox,nickname[i],localStorage.getItem('nickname'))
+          messageStyle(chatBox,chat,nameBox,timeBox,repotimeBox,nickname[i],localStorage.getItem('nickname'))
           
           chat.appendChild(message)
           chatBox.appendChild(chat);
           chatBox.appendChild(timeBox);
+
+          chatBox.appendChild(repotimeBox);
           
           MessageBox.current.appendChild(chatBox)
+
+          // //채팅삭제
+          // chatBox.addEventListener('click',()=>{
+          //   if(nickname[i] ===localStorage.getItem("nickname")){
+          //     if(confirm("선택한 메시지를 삭제하시겠습니까?")){
+          //       axios.delete("http://localhost:5858/chat",
+          //         {
+          //           nickname : localStorage.getItem("nickname"),
+          //           repotime : repotime[i]
+          //         },
+                  
+          //       ).then((res)=>{
+          //         console.log(res)
+          //       }).catch((err)=>{
+          //         console.log(err)
+          //       })
+          //     }else{
+          //       alert("취소되었습니다")
+          //     }
+          //   }
+          // })
         }
       
       }).catch((err)=>{
@@ -102,13 +131,13 @@ const Chating = () => {
     //* 시간표시
     const timeBox = document.createElement("div")
     timeBox.textContent =msg.time;
-
+    const repotime = document.createElement('div');
 
     //* 메세지 타입이 "message" 일때
     if(msg.type==="message"){
       //* 채팅박스 스타일 지정 >> 일단 함수로 만들어놨음..
       //messageStyle(chat,msg.nickname,localStorage.getItem("nickname"));
-      messageStyle(chatBox,chat,nameBox,timeBox,msg.nickname,localStorage.getItem("nickname"));
+      messageStyle(chatBox,chat,nameBox,timeBox,repotime,msg.nickname,localStorage.getItem("nickname"));
     }else {
       alarmStyle(chat);
     }
@@ -125,7 +154,11 @@ const Chating = () => {
 
     //채팅박스에 메세지를 추가함
     MessageBox.current.appendChild(chatBox)
+
+    
+    
   }
+  
   ws.onmessage = receiveMessage //서버에 데이터가 전송되었을때 함수 실행
   
   const chat = useInput();
@@ -183,9 +216,6 @@ const Chating = () => {
     clearInput();
   }
 //?============================= 채팅 보내기 끝========================================
-
-
-
 
 //엔터키를 눌렀을때 submit 입력
   const onEnter = (e) =>{
