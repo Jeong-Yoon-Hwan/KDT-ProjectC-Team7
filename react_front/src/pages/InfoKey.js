@@ -3,13 +3,11 @@ import Info from "./Info";
 import styled from "styled-components";
 import axios from "axios";
 import { SwitchLayoutGroupContext } from "framer-motion";
+import { Link } from "react-router-dom";
+
 
 const InfoKey = () =>{
-  if(localStorage.getItem("accessKey")!==null){
-    location.href="http://localhost:8000/info"
-  }else{
-    
-  }
+
   const [accessKey,setAccessKey] = useState("");
   const accessKeyHandle = (e) =>{
     setAccessKey(e.target.value)
@@ -25,39 +23,18 @@ const InfoKey = () =>{
     console.log(secretKey)
   },[accessKey,secretKey])
   const onSubmit = () =>{
-    
-    swal({
-      //title: "입력한 정보를 저장하시겠습니까?",
-      text: "입력한 정보를 저장하시겠습니까?",
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-    .then((willDelete) => {
-      if (willDelete) {
-        swal("입력한 정보가 저장되었습니다", {
-          icon: "success",
-        });
-        localStorage.setItem("accessKey",accessKey)
-        localStorage.setItem("secretKey",secretKey)
-        location.href="http://localhost:8000/info"
-      } else {
-        swal("취소되었습니다");
-        setAccessKey("")
-        setSecretKey("");
-      }
-    });
+    localStorage.setItem("accessKey",accessKey)
+    localStorage.setItem("secretKey",secretKey)
   }
 
   return(
     <Main>
     <Title>업비트 키 입력</Title>
     <Container>
-      
       <div>
         <input type="text" onChange={accessKeyHandle} value={accessKey} placeholder={"AccessKey를 입력하세요"}/>
         <input type="text" onChange={secretKeyHandle} value={secretKey} placeholder={"SecretKey를 입력하세요"}/>
-        <Button onClick={onSubmit}>저장</Button>
+        <Button onClick={onSubmit}><Link to ="/info">저장</Link></Button>
       </div>
     </Container>    
     </Main>

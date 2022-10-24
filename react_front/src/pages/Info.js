@@ -5,7 +5,7 @@ import currentPrices from "../common/currentPrice";
 import Trade from "../components/Trade";
 
 const Info = () =>{
-  purchaseData();
+ 
   //! 투자내역 데이터 수신
   function purchaseData(){
     axios.post("http://localhost:5858/trade/account",
@@ -26,7 +26,7 @@ const Info = () =>{
       for(let i=1;i<response.data.length; i++){
         assetArr.push(response.data[i])
       }
-      for(let i=1;i<response.data.length;i++){
+      for(let i=1;i<assetArr.length;i++){
         localStorage.setItem("AssetList",JSON.stringify(assetArr))
       }
       //console.log(assetArr);
@@ -34,6 +34,7 @@ const Info = () =>{
       console.log(error)
     })
   }
+  purchaseData();
 
   const KRW = JSON.parse(localStorage.getItem("total"))
 
@@ -43,6 +44,7 @@ const Info = () =>{
   
   //!총 매수가격 구하기 대작전       (보유수량  X  매수평균가)
   const buyList = [];
+  
   for(let i=0;i<AssetList.length;i++){
     console.log(AssetList[i].avg_buy_price * AssetList[i].balance)
     buyList.push(AssetList[i].avg_buy_price * AssetList[i].balance)
@@ -175,9 +177,7 @@ const Info = () =>{
                       ):(
                         <p style={{color:"#E85A43"}}>{revenue}</p>
                       )}
-                   
                   </div>
-                
               </article>
             </div>
           </section>
