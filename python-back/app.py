@@ -62,7 +62,7 @@ def cancel_order():
    secretKey = data['secretKey']
    uuid = data['uuid']
    trade.cancel_order(accessKey, secretKey, uuid)
-   return jsonnify({'취소되었습니다.'})
+   return jsonify({'취소되었습니다.'})
 
 @app.route('/autobot', methods=['POST'])
 def autobot():
