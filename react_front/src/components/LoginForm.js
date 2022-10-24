@@ -46,8 +46,8 @@ const LoginForm = () => {
       //* 로그인 성공하면 token,nickname 받아와서 로컬스토리지에 저장함//
       localStorage.setItem("token",response.data.token);
       localStorage.setItem("nickname",response.data.nickname);
-      localStorage.setItem("password",response.data.password);
-      localStorage.setItem("email",response.data.email);
+      //localStorage.setItem("password",response.data.password);
+      //localStorage.setItem("email",response.data.email);
       location.reload();
     })  
     .catch(function (error) {
