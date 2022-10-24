@@ -23,8 +23,40 @@ const InfoKey = () =>{
     console.log(secretKey)
   },[accessKey,secretKey])
   const onSubmit = () =>{
-    localStorage.setItem("accessKey",accessKey)
-    localStorage.setItem("secretKey",secretKey)
+    
+      axios.post("http://localhost:5858/trade/account",
+        {
+          accessKey : accessKey,
+          secretKey : secretKey
+        },
+        {
+          headers :{
+            Authorization: `Bearer ${localStorage.getItem("token")}`
+          }
+        }
+      ).then((response)=>{
+        console.log(response.data)
+        
+        //* 로컬스토리지에 데이터 저장 
+        localStorage.setItem("total",JSON.stringify(response.data[0]))
+
+        let assetArr = []
+        for(let i=1;i<response.data.length; i++){
+          assetArr.push(response.data[i])
+        }
+        for(let i=1;i<assetArr.length;i++){
+          localStorage.setItem("AssetList",JSON.stringify(assetArr))
+        }
+
+
+        alert("저장")
+      }).catch((error)=>{
+        console.log(error)
+      })
+    
+    //localStorage.setItem("accessKey",accessKey)
+    //localStorage.setItem("secretKey",secretKey)
+    
   }
 
   return(
@@ -34,7 +66,7 @@ const InfoKey = () =>{
       <div>
         <input type="text" onChange={accessKeyHandle} value={accessKey} placeholder={"AccessKey를 입력하세요"}/>
         <input type="text" onChange={secretKeyHandle} value={secretKey} placeholder={"SecretKey를 입력하세요"}/>
-        <Button onClick={onSubmit}><Link to ="/info">저장</Link></Button>
+        <Button onClick={onSubmit}>저장</Button>
       </div>
     </Container>    
     </Main>
