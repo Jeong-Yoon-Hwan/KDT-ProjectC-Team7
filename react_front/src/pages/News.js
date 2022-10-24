@@ -1,6 +1,6 @@
 import React, { createElement, useRef, useState } from "react";
 import styled from "styled-components";
-import jsonData from "../../../python-back/news_data/news.json";
+import jsonData from "../../../python-back/news.json";
 import NewsMainText from "../components/NewsMainText";
 import axios from "axios"
 
