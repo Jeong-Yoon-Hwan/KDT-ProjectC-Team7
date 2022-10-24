@@ -11,6 +11,12 @@ fs.mkdir(uploadDir, (err) => {
   if (err && err.code === 'EEXIST') console.error;
 });
 
+const currentDir = path.resolve();
+
+export async function upLoadClient(req, res) {
+  return res.sendFile(currentDir + '/client/upload.html');
+}
+
 export function fileList(req, res) {
   fs.readdir(uploadDir, (error, file) => {
     if (error) {
