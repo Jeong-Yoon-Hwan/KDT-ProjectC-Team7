@@ -4,7 +4,28 @@ import styled from "styled-components";
 import useInput from "../hooks/useInput";
 
 const Trade = () =>{
+  
+  const [buyColor,setBuyColor] = useState("red")
+  const [sellColor,setSellColor] = useState("")
+  
+  const [buy, setBuy] = useState(true);
+  const [sell,setSell] = useState(false);
 
+  const formHandle = (e) =>{
+    console.log(e.target.value)
+    if(e.target.value==="buy"){
+      setBuy(true)
+      setBuyColor("red")
+      setSell(false)
+      setSellColor("white")
+    }else if(e.target.value==="sell"){
+      setBuy(false)
+      setBuyColor("white")
+      setSell(true)
+      setSellColor("red")
+    }
+  }
+  
   // *useInput Hook 사용
   //const AccessKey = useInput();
   //const SecretKey = useInput();
@@ -12,6 +33,10 @@ const Trade = () =>{
   
   const [CoinName,setCoinName] = useState("");
   const coinHandle = (e) =>{setCoinName(e.target.value)}
+
+  const [volume,setVolumn] = useState("");
+  const volumeHandle = (e) => {setVolumn(e.target.value);}
+
 
   //코인명 입력시 coinCheck함수 실행시켜서 마켓코드를얻음
   useEffect(()=>{
@@ -34,17 +59,12 @@ const Trade = () =>{
     })
   }
 
-  function InputClear(){
-    setCoinName("");
-    
-  }
-  
-  
+//! 매수
   const buyOrder = () =>{
     axios.post("http://localhost:5959/buy_order",
       {
-        accessKey : localStorage.get("accessKey"),
-        secretKey : localStorage.get("secretKey"),
+        accessKey : localStorage.getItem("accessKey"),
+        secretKey : localStorage.getItem("secretKey"),
         marketCode : CoinName,
         price : Capital.value,
       },{
@@ -52,9 +72,23 @@ const Trade = () =>{
           "Content-Type": `application/json`,
         },
       }
-      
     ).then((res)=>{
-      
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  }
+
+//! 매도
+  const sellOrder = () =>{
+    axios.post("http://localhost:5959/sell_order",
+      {
+        accessKey : localStorage.getItem("accessKye"),
+        secretKey : localStorage.getItem("secretKey"),
+        marketCode : CoinName,
+        volume : volume,
+      }
+    ).then((res)=>{
       console.log(res)
     }).catch((err)=>{
       console.log(err)
@@ -63,18 +97,36 @@ const Trade = () =>{
 
   return(
     <Container>
-      {/* <section>
-          <input type="text" placeholder="AccessKey를 입력하세요" />
-          <input type="text" placeholder="SecretKey를 입력하세요" />
-      </section> */}
-      <section>
+      <header>
+        <Button2 value="buy" color={buyColor} onClick={formHandle}>매수</Button2>
+        <Button2 value="sell" color={sellColor} onClick={formHandle}>매도</Button2>
+      </header>
+      {buy ? (
+        //* 매수 폼
+        <>
+          <section>
           <input type="text" placeholder="코인명을 입력하세요" value={CoinName} onChange={coinHandle}/>
           <input type="text" placeholder="자본금을 입력하세요" value={Capital.value} onChange={Capital.onChange}/>
-      </section>
-      <footer>
-        <Button onClick={buyOrder}>실행</Button>
-        <Button color="#E85A43" onClick={InputClear}>취소</Button>
-      </footer>
+          </section>
+          <footer>
+            <Button onClick={buyOrder}>매수하기</Button>
+            {/* <Button color="#E85A43" onClick={InputClear}>취소</Button> */}
+          </footer>
+        </>
+      ):(
+        //* 매도 폼
+        <>
+          <section>
+          <input type="text" placeholder="코인명을 입력하세요" value={CoinName} onChange={coinHandle}/>
+          <input type="text" placeholder="매도할 수량을 입력하세요" value={volume} onChange={volumeHandle}/>
+          </section>
+          <footer>
+            <Button onClick={sellOrder}>매도하기</Button>
+            {/* <Button color="#E85A43" onClick={InputClear}>취소</Button> */}
+          </footer>
+        </>
+      )}
+      
     </Container>    
   )
 }
@@ -95,6 +147,12 @@ const Container = styled.div`
   flex-direction: column;
   gap:10px;
 
+  & > header {
+    display: flex;
+    gap:10px;
+    
+  }
+
   input {
     width:100%;
     height:40px;
@@ -104,16 +162,9 @@ const Container = styled.div`
   }
 
   /* 키 입력 폼 */
-  & > section:nth-child(1){
+  & > section{
     display: flex;
     flex-direction:column;
-    gap:10px;
-    
-  }
-
-  /* 코인명, 자본금 입력폼 */
-  & > section:nth-child(2){
-    display: flex;
     gap:10px;
   }
 
@@ -129,6 +180,16 @@ const Button = styled.button`
   height:44px;
   background:${props => props.color || "#464BF2"};
   color:white;
+  border:0;
+  border-radius:2px;
+  font-weight:bold;
+`
+
+const Button2 = styled.button`
+  width:100%;
+  height:44px;
+  background:${props => props.color || "white"};
+  color:black;
   border:0;
   border-radius:2px;
   font-weight:bold;
