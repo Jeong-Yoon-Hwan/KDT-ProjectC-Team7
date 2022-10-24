@@ -33,12 +33,14 @@ const Navigation = () =>{
       <Ul>
         <li><Link to="/">거래소</Link></li>
         <li><Link to="/trading">차트 조회</Link></li>
-        {/* <li><Link to="/info">투자내역</Link></li> */}
-        <li><Link to="/infokey">투자내역</Link></li>
+          <li><Link to="/infokey">투자내역</Link></li>
         <li><Link to="/news">뉴스</Link></li>
-        {/* <li><Link to="/board">게시판</Link></li> */}
         <li><Link to="/video">영상</Link></li>
-        <li><Link to="upload">업로드</Link></li>
+
+        {localStorage.getItem("nickname") === "admin" ? (
+          <li><Link to="upload">업로드</Link></li>
+        ):(null)}
+        
       </Ul>
     </>
   )
