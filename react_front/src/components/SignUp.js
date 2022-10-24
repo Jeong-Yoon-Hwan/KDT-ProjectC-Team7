@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { motion } from "framer-motion";
 
+
 const SinUpBox = styled.div`
   width:230px;
   height:max-content;
@@ -66,9 +67,11 @@ const SignUp = () =>{
       }
     ).then((response)=>{
       console.log(response);
-      location.href="http://localhost:8000/";
+      swal("회원가입 성공","회원가입이 완료되었습니다 로그인 해주세요","success").then( ()=>{location.href="http://localhost:8000/"})
     }).catch((error)=>{
       console.log(error);
+      swal("회원가입 실패","회원가입에 실패했습니다 입력정보를 다시 확인해주세요","warning").then(()=>{
+      })
     })
   }
 
