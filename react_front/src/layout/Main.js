@@ -8,10 +8,11 @@ import Trading from '../pages/Trading.js';
 import Info from '../pages/Info.js';
 import Board from '../pages/board.js';
 import Video from '../pages/Video.js';
+import Upload from '../pages/upload.js';
 
 const MainBox = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
   width:calc(100vw - 400px); 
   height:90vh; 
@@ -32,6 +33,7 @@ const Main = (props) => {
             <Route path="/info" element={<Info/>}></Route>
             <Route path="/board" element={<Board/>}></Route>
             <Route path="/video" element={<Video/>}></Route>
+            <Route path="/upload" element={<Upload/>}></Route>
           </Routes>
         </MainBox>
       </BrowserRouter>

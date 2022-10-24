@@ -37,6 +37,7 @@ const Navigation = () =>{
         <li><Link to="/news">뉴스</Link></li>
         {/* <li><Link to="/board">게시판</Link></li> */}
         <li><Link to="/video">영상</Link></li>
+        <li><Link to="upload">업로드</Link></li>
       </Ul>
     </>
   )
