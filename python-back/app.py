@@ -41,7 +41,8 @@ def buy_order():
    secretKey = data['secretKey']
    marketCode = data['marketCode']
    price = int(data['price'])
-   return trade.buy_order(accessKey, secretKey, marketCode, price)
+   trade.buy_order(accessKey, secretKey, marketCode, price)
+   return jsonify({'주문 결과' : '매수 완료'})
 
 
 @app.route('/sell_order', methods=['POST'])
@@ -51,8 +52,8 @@ def sell_order():
    secretKey = data['secretKey']
    marketCode = data['marketCode']
    volume = str(data['volume'])
-   return trade.sell_order(accessKey, secretKey, marketCode, volume)
-   
+   trade.sell_order(accessKey, secretKey, marketCode, volume)
+   return jsonify({'주문 결과': '매도 완료'})
 
 @app.route('/cancel_order', methods=['POST'])
 def cancel_order():
@@ -69,7 +70,8 @@ def autobot():
    secretKey = data['secretKey']
    marketCode = data['marketCode']
    capital = data['capital']
-   return autobots.autobot(accessKey, secretKey, marketCode, capital)
+   autobots.autobot(accessKey, secretKey, marketCode, capital)
+   return jsonify({'자동 매매 실행중'})
    
 @app.route('/', methods=['GET'])
 def hello():
