@@ -71,9 +71,9 @@ def autobot():
    capital = data['capital']
    return autobots.autobot(accessKey, secretKey, marketCode, capital)
    
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['GET'])
 def hello():
-   data = request.get_json()
+   # data = request.get_json()
    return jsonify(newsAdd())
 
 if __name__ == '__main__':  
