@@ -15,7 +15,7 @@ const InfoKey = () =>{
   const [secretKey,setSecretKey] = useState("");
   const secretKeyHandle = (e) =>{
     setSecretKey(e.target.value);
-  }
+  } 
   useEffect(()=>{
     setAccessKey(accessKey)
     setSecretKey(secretKey)
@@ -24,39 +24,9 @@ const InfoKey = () =>{
   },[accessKey,secretKey])
   const onSubmit = () =>{
     
-      axios.post("http://localhost:5858/trade/account",
-        {
-          accessKey : accessKey,
-          secretKey : secretKey
-        },
-        {
-          headers :{
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-          }
-        }
-      ).then((response)=>{
-        console.log(response.data)
-        
-        //* 로컬스토리지에 데이터 저장 
-        localStorage.setItem("total",JSON.stringify(response.data[0]))
-
-        let assetArr = []
-        for(let i=1;i<response.data.length; i++){
-          assetArr.push(response.data[i])
-        }
-        for(let i=1;i<assetArr.length;i++){
-          localStorage.setItem("AssetList",JSON.stringify(assetArr))
-        }
-
-
-        alert("저장")
-      }).catch((error)=>{
-        console.log(error)
-      })
-    
-    //localStorage.setItem("accessKey",accessKey)
-    //localStorage.setItem("secretKey",secretKey)
-    
+    localStorage.setItem("accessKey",accessKey)
+    localStorage.setItem("secretKey",secretKey)
+    alert("저장")
   }
 
   return(

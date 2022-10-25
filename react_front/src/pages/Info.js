@@ -6,35 +6,35 @@ import Trade from "../components/Trade";
 
 const Info = () =>{
  
-  // //! 투자내역 데이터 수신
-  // function purchaseData(){
-  //   axios.post("http://localhost:5858/trade/account",
-  //     {
-  //       accessKey : localStorage.getItem("accessKey"),
-  //       secretKey : localStorage.getItem("secretKey")
-  //     },
-  //     {
-  //       headers :{
-  //         Authorization: `Bearer ${localStorage.getItem("token")}`
-  //       }
-  //     }
-  //   ).then((response)=>{
-  //     console.log(response.data)
-  //     //* 로컬스토리지에 데이터 저장 
-  //     localStorage.setItem("total",JSON.stringify(response.data[0]))
-  //     let assetArr = []
-  //     for(let i=1;i<response.data.length; i++){
-  //       assetArr.push(response.data[i])
-  //     }
-  //     for(let i=1;i<assetArr.length;i++){
-  //       localStorage.setItem("AssetList",JSON.stringify(assetArr))
-  //     }
-  //     //console.log(assetArr);
-  //   }).catch((error)=>{
-  //     console.log(error)
-  //   })
-  // }
-  // purchaseData();
+  //! 투자내역 데이터 수신
+  function purchaseData(){
+    axios.post("http://localhost:5858/trade/account",
+      {
+        accessKey : "TJWKTIItRVfprh0z4jhSU1xCxGW6eSPi34SntbZV",
+        secretKey : "JClYciuVVaxymBbIKaSRB8Em50xz0KcnxIwqbS2Z"
+      },
+      {
+        headers :{
+          Authorization: `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    ).then((response)=>{
+      //console.log(response.data)
+      //* 로컬스토리지에 데이터 저장 
+      localStorage.setItem("total",JSON.stringify(response.data[0]))
+      let assetArr = []
+      for(let i=1;i<response.data.length; i++){
+        assetArr.push(response.data[i])
+      }
+      for(let i=1;i<assetArr.length;i++){
+        localStorage.setItem("AssetList",JSON.stringify(assetArr))
+      }
+      //console.log(assetArr);
+    }).catch((error)=>{
+      console.log(error)
+    })
+  }
+  purchaseData();
 
   const KRW = JSON.parse(localStorage.getItem("total"))
 
@@ -46,7 +46,7 @@ const Info = () =>{
   const buyList = [];
   
   for(let i=0;i<AssetList.length;i++){
-    console.log(AssetList[i].avg_buy_price * AssetList[i].balance)
+    //console.log(AssetList[i].avg_buy_price * AssetList[i].balance)
     buyList.push(AssetList[i].avg_buy_price * AssetList[i].balance)
   }
   //console.log(buyList)
@@ -67,19 +67,15 @@ const Info = () =>{
   currentPrices(marketCode);
   
   //* 현재가 구하기
-  const getCurrentPrice = JSON.parse(localStorage.getItem("current_price"));
-  console.log(getCurrentPrice)
-
+  const getCurrentPrice = localStorage.getItem("current_price");
+  
+  //console.log(JSON.parse(getCurrentPrice))
   //* 현재가 
-  //const currentPrice = JSON.parse(getCurrentPrice);
+  const currentPrice = JSON.parse(getCurrentPrice);
   //console.log(currentPrice[1])
-  const currentPrice = [];
-  for(let i=0;i<getCurrentPrice.length;i++){
-    currentPrice.push(getCurrentPrice[i])
-  }
-  console.log(currentPrice[1])
-  console.log("테스트입니다")
-//!평가금액 구하기 대작전 
+  
+  
+//!평가금액 구하기 대작전
   const trade_price = []; //평가금액 리스트
   for(let i=0;i<AssetList.length;i++){
     //console.log(`${currentPrice[i].market}의 평가금액:`+AssetList[i].balance * currentPrice[i].trade_price)
@@ -121,7 +117,7 @@ const Info = () =>{
     )
     infoArr.push(info)
   }
-  console.log(infoArr);
+  //console.log(infoArr);
   return(
     <Container>
       <section>

@@ -97,6 +97,9 @@ const Trade = () =>{
 
   return(
     <Container>
+      <Title>매매</Title>
+    <ContentBox>
+      
       <header>
         <Button2 value="buy" color={buyColor} onClick={formHandle}>매수</Button2>
         <Button2 value="sell" color={sellColor} onClick={formHandle}>매도</Button2>
@@ -127,17 +130,21 @@ const Trade = () =>{
         </>
       )}
       
-    </Container>    
+    </ContentBox> 
+    </Container>   
   )
 }
 
 export default Trade;
 
-
 const Container = styled.div`
+  width:100%;
+  height:100%;
+`
+const ContentBox = styled.div`
   width:30vw;
   min-width: 500px;
-  height:inherit;
+  height:25vh;
   min-height: 240px;
   border-radius: 2px;
   background-color: #333333;
@@ -150,7 +157,6 @@ const Container = styled.div`
   & > header {
     display: flex;
     gap:10px;
-    
   }
 
   input {
@@ -193,4 +199,25 @@ const Button2 = styled.button`
   border:0;
   border-radius:2px;
   font-weight:bold;
+`
+
+const Title = styled.div`
+  width:100%;
+  height:max-content;
+  padding:10px;
+  border-left: 3px solid #464BF2;
+  font-weight:bold;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+
+  & > button{
+      width:228px;
+      height:20px;
+      background:${props => props.color || "#464BF2"};
+      color:white;
+      border:0;
+      border-radius:2px;
+      font-weight:bold;
+  }
 `
