@@ -6,13 +6,13 @@ import calculation from "../common/calculation";
 import Upbit_total from "../components/Upbit_total";
 import Trade from "../components/Trade";
 import Loading from "../components/Loading"
-
+import InfoKey from "../pages/InfoKey";
 
 
 axios.post("http://localhost:5858/trade/account",
 {
-  accessKey : "TJWKTIItRVfprh0z4jhSU1xCxGW6eSPi34SntbZV",
-  secretKey : "JClYciuVVaxymBbIKaSRB8Em50xz0KcnxIwqbS2Z"
+  accessKey : localStorage.getItem("accessKey"),
+  secretKey : localStorage.getItem("secretKey")
 },
 {
   headers :{
@@ -147,7 +147,11 @@ function infoList(coinName,count,buyAvg,buyPrice,tradePrice,lossPrice){
 // },4000)
 
 const Info_RE = (props) =>{
-
+if(localStorage.getItem("accessKey")===null){
+  return(
+    <InfoKey></InfoKey>
+  )
+}else{
 
   const [render,setRender] = useState(false)
   useEffect(()=>{
@@ -178,7 +182,7 @@ const Info_RE = (props) =>{
           </Top>
           <Bottom>
           <ListBox>
-          <header><Title>보유자산 리스트</Title></header>
+          
           <section>
           <div className="table-wrapper">
               <div className="column-title">
@@ -221,7 +225,7 @@ const Info_RE = (props) =>{
       <Loading></Loading>
     )
   }
-    
+}
 }
 
 export default Info_RE;

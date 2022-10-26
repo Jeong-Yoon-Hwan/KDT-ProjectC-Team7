@@ -33,7 +33,7 @@ const Navigation = () =>{
       <Ul>
         <li><Link to="/">가상화폐 순위</Link></li>
         <li><Link to="/trading">차트 조회</Link></li>
-        {/* <li><Link to="/info">투자내역</Link></li> */}
+        {/* <li><Link to="/infokey">API 키 입력</Link></li> */}
         <li><Link to="/info_re">투자내역</Link></li>
         <li><Link to="/news">뉴스</Link></li>
         <li><Link to="/video">영상</Link></li>

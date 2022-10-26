@@ -112,6 +112,10 @@ const Container = styled.div`
       border:0;
       border-radius:2px;
       font-weight:bold;
+      cursor: pointer;
+      :hover{
+        background-color: gray;
+      }
     }
   }
   

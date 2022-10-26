@@ -97,7 +97,13 @@ const Trade = () =>{
 
   return(
     <Container>
-      <Title>매매</Title>
+      <Title>매매
+      <button onClick={()=>{
+        localStorage.removeItem("accessKey");
+        localStorage.removeItem("secretKey");
+        location.reload();
+      }}>업비트 키 재입력</button>
+      </Title>
     <ContentBox>
       
       <header>
@@ -147,7 +153,7 @@ const ContentBox = styled.div`
   height:25vh;
   min-height: 240px;
   border-radius: 2px;
-  background-color: #333333;
+  background-color: #333;
   box-shadow: 4px 4px 20px gray;
   padding:30px;
   display: flex;
@@ -189,6 +195,10 @@ const Button = styled.button`
   border:0;
   border-radius:2px;
   font-weight:bold;
+  cursor: pointer;
+      :hover{
+        background-color: gray;
+      }
 `
 
 const Button2 = styled.button`
@@ -199,6 +209,10 @@ const Button2 = styled.button`
   border:0;
   border-radius:2px;
   font-weight:bold;
+  cursor: pointer;
+      :hover{
+        background-color: gray;
+      }
 `
 
 const Title = styled.div`
@@ -219,5 +233,9 @@ const Title = styled.div`
       border:0;
       border-radius:2px;
       font-weight:bold;
+      cursor: pointer;
+      :hover{
+        background-color: gray;
+      }
   }
 `

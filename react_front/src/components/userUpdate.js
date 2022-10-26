@@ -140,7 +140,8 @@ const Container = styled.div`
   transform: translate(-50%,-50%);
 //background-color: rgba(51,51,51,0.85);
   background-color: #333;
-  border-radius: 8px;
+  border-radius: 2px;
+  
   
   //* 헤더
   & > header {
@@ -174,6 +175,10 @@ const Container = styled.div`
       border:0;
       border-radius:2px;
       font-weight:bold;
+      cursor: pointer;
+      :hover{
+        background-color: gray;
+      }
     }
   }
   

@@ -26,7 +26,10 @@ const InfoKey = () =>{
     
     localStorage.setItem("accessKey",accessKey)
     localStorage.setItem("secretKey",secretKey)
-    alert("저장")
+    swal("저장완료","API 키가 저장되었습니다","success").then(()=>{
+      location.reload();
+    })
+    
   }
 
   return(
@@ -88,6 +91,10 @@ const Button = styled.button`
   border:0;
   border-radius:2px;
   font-weight:bold;
+  cursor: pointer;
+      :hover{
+        background-color: gray;
+      }
 `
 const Title = styled.div`
   width:100%;
