@@ -4,7 +4,7 @@ import { isAuth } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.get('/', isAuth, downPage);
+router.get('/', downPage);
 router.get('/autobot', autobot);
 
 export default router;
