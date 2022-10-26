@@ -2,6 +2,7 @@ import axios from "axios";
 import React,{useEffect, useState} from "react";
 import styled from "styled-components";
 import "../index.css";
+import Loading from "../components/Loading";
 
 const Chart = () => {
     const refreshPage = () =>{
@@ -35,13 +36,13 @@ const Chart = () => {
     return(
       <Container>
         <header>
-          <h1>  가상화폐 순위</h1>
+          <h1>  가상화폐 TOP 100</h1>
           <button onClick={ refreshPage }><span className="material-symbols-outlined">refresh</span></button>
         </header>
             <section>
         
           {
-            loading ? <div className="loaingArea"><div className="img"></div></div> :
+            loading ? <Loading></Loading> :
             (
             <div className="table-wrapper">
               <div className="column-title">
@@ -59,14 +60,23 @@ const Chart = () => {
                 //coins에 저장된 배열값을 map으로 반복
                 coins.map((coin,idx)=>(
                   <div key={idx} className="column-item">
-                    <div style={{width:"4%"}}>{coin.rank}</div>
+                    <div style={{width:"2%"}}>{coin.rank}</div>
                     <div style={{width:"20%",textAlign:"center"}}>{coin.name}</div>
                     <div style={{width:"10%",textAlign:"center"}}>{coin.symbol}</div>
                     <div style={{width:"10%",textAlign:"center"}}>{(coin.quotes.KRW.price.toFixed(1)).toLocaleString()}</div>
                     <div style={{width:"10%",textAlign:"center"}}>{(coin.quotes.KRW.market_cap / 1000000000000).toFixed(3)}(T)</div>
                     <div style={{width:"10%",textAlign:"center"}}>{ (coin.quotes.KRW.volume_24h / 1000000000000).toFixed(3) }(T)</div>
-                    <div style={{width:"10%",textAlign:"center"}}>{ coin.quotes.KRW.percent_change_24h.toFixed(2) }%</div>
-                    <div style={{width:"10%",textAlign:"center"}}>{ coin.quotes.KRW.percent_change_7d.toFixed(2) }%</div>
+                    {coin.quotes.KRW.percent_change_24h > 0 ? (
+                      <div style={{width:"10%",textAlign:"center",color:"red"}}>{ coin.quotes.KRW.percent_change_24h.toFixed(2) }%</div>
+                    ):(
+                      <div style={{width:"10%",textAlign:"center",color:"blue"}}>{ coin.quotes.KRW.percent_change_24h.toFixed(2) }%</div>
+                    )}
+                    {coin.quotes.KRW.percent_change_7d > 0 ? (
+                      <div style={{width:"10%",textAlign:"center",color:"red"}}>{ coin.quotes.KRW.percent_change_7d.toFixed(2) }%</div>
+                    ):(
+                      <div style={{width:"10%",textAlign:"center",color:"blue"}}>{ coin.quotes.KRW.percent_change_7d.toFixed(2) }%</div>
+                    )}
+                    
                   </div>
                 ))
               }

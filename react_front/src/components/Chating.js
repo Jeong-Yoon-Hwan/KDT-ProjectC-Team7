@@ -186,8 +186,8 @@ const Chating = () => {
       }
 
     ).then((response)=>{
-      console.log(response)
-      //!
+      //console.log(response)
+      
       receiveMessage
     }).catch((error)=>{
       console.log(error)
