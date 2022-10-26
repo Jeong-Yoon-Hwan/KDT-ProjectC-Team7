@@ -110,8 +110,10 @@ const NewsBox = styled.div`
     //background:${props => props.color || "#464BF2"};
     display: flex;
     width:100%;
+    min-width: 400px;
     //height:15vh;
     height:15vh;
+    min-height: 150px;
     background-color: white;
     padding: 20px;
     border-radius: 2px;
