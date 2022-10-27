@@ -65,7 +65,7 @@ const Trade = () =>{
       {
         accessKey : localStorage.getItem("accessKey"),
         secretKey : localStorage.getItem("secretKey"),
-        marketCode : CoinName,
+        marketCode : localStorage.getItem("coinName"),
         price : Capital.value,
       },{
         headers: {
@@ -74,6 +74,22 @@ const Trade = () =>{
       }
     ).then((res)=>{
       console.log(res)
+      swal({
+        text: "입력하신 정보로 매수 하시겠습니까?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("매수요청이 완료되었습니다.", {
+            icon: "success",
+          }).then(()=>{location.reload();});
+        } else {
+          swal("취소되었습니다.");
+        }
+      });
+      
     }).catch((err)=>{
       console.log(err)
     })
@@ -85,11 +101,28 @@ const Trade = () =>{
       {
         accessKey : localStorage.getItem("accessKye"),
         secretKey : localStorage.getItem("secretKey"),
-        marketCode : CoinName,
+        marketCode : localStorage.getItem("coinName"),
         volume : volume,
       }
     ).then((res)=>{
       console.log(res)
+      
+      swal({
+        text: "입력하신 정보로 매도 하시겠습니까?",
+        icon: "warning",
+        buttons: true,
+        dangerMode: true,
+      })
+      .then((willDelete) => {
+        if (willDelete) {
+          swal("매도요청이 완료되었습니다.", {
+            icon: "success",
+          }).then(()=>{location.reload();});
+        } else {
+          swal("취소되었습니다.");
+        }
+      });
+
     }).catch((err)=>{
       console.log(err)
     })
@@ -226,8 +259,8 @@ const Title = styled.div`
   margin-bottom: 10px;
 
   & > button{
-      width:228px;
-      height:20px;
+      width:200px;
+      height:15px;
       background:${props => props.color || "#464BF2"};
       color:white;
       border:0;

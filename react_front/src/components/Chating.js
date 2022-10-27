@@ -81,27 +81,6 @@ const Chating = () => {
           chatBox.appendChild(repotimeBox);
           
           MessageBox.current.appendChild(chatBox)
-
-          // //채팅삭제
-          // chatBox.addEventListener('click',()=>{
-          //   if(nickname[i] ===localStorage.getItem("nickname")){
-          //     if(confirm("선택한 메시지를 삭제하시겠습니까?")){
-          //       axios.delete("http://localhost:5858/chat",
-          //         {
-          //           nickname : localStorage.getItem("nickname"),
-          //           repotime : repotime[i]
-          //         },
-                  
-          //       ).then((res)=>{
-          //         console.log(res)
-          //       }).catch((err)=>{
-          //         console.log(err)
-          //       })
-          //     }else{
-          //       alert("취소되었습니다")
-          //     }
-          //   }
-          // })
         }
       
       }).catch((err)=>{
@@ -183,8 +162,12 @@ const Chating = () => {
       {
         nickname : localStorage.getItem("nickname"),
         text : chat.value        
+      },
+      {
+        headers :{
+          Authorization : `Bearer ${localStorage.getItem("token")}`
+        }
       }
-
     ).then((response)=>{
       //console.log(response)
       

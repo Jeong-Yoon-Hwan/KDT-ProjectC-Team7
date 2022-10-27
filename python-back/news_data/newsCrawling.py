@@ -55,8 +55,8 @@ def newsAdd():
     while i < len(main_textURL):
       response2 = requests.get(main_textURL[i], headers= headers)
       beautifulSoup2 = BeautifulSoup(response2.content, "html.parser")
-      test = beautifulSoup2.find("div",{"class":"newsct_article _article_body"})
-      main_text.append(test.get_text().strip())
+      main_url = beautifulSoup2.find("div",{"class":"newsct_article _article_body"})
+      main_text.append(main_url.get_text().strip())
 
       i = i+1
       # 클래스 생성

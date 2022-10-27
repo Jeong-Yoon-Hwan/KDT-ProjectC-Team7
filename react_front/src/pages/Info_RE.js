@@ -200,7 +200,7 @@ if(localStorage.getItem("accessKey")===null){
                     <div style={{width:"4%"}}>{value.coinName}</div>
                     <div style={{width:"20%",textAlign:"right"}}>{value.count}&nbsp;<span style={{fontSize:"12px"}}>{value.coinName}</span></div>
                     <div style={{width:"10%",textAlign:"right"}}>{value.buyAvg}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
-                    <div style={{width:"10%",textAlign:"right"}}>{value.buyPrice}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
+                    <div style={{width:"10%",textAlign:"right"}}>{Math.ceil(value.buyPrice)}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
                     <div style={{width:"10%",textAlign:"right",fontWeight:"bold",background:""}}>{value.tradePrice}&nbsp;<span style={{fontSize:"12px"}}>KRW</span></div>
                     {/* 금액이 음수일떄는 파란색으로 출력 */}
                     {value.lossPrice < 0 ? (
