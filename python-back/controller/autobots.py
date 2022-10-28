@@ -1,5 +1,5 @@
 # 원화로만 거래 가능
-def autobot (accessKey, secretKey, marketCode, capital):
+def autobot (marketCode, capital):
 		import datetime as dt
 		start_time = dt.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 		end_time = (dt.datetime.now() + dt.timedelta(1)).strftime('%Y-%m-%d %H:%M:%S')
@@ -13,10 +13,10 @@ def autobot (accessKey, secretKey, marketCode, capital):
 						from dotenv import load_dotenv
 						from pyupbit.exchange_api import Upbit
 				
-						# load_dotenv()
-						# access_key = os.environ['ACCESS_KEY']
-						# secret_key = os.environ['SECRET_KEY']
-						upbit = Upbit(accessKey, secretKey)	
+						load_dotenv()
+						access_key = os.environ['ACCESS_KEY']
+						secret_key = os.environ['SECRET_KEY']
+						upbit = Upbit(access_key, secret_key)	
 						# marketCode = 'KRW-XRP'
 						start_capital = int(capital)
 						########################################################################
@@ -74,9 +74,10 @@ def autobot (accessKey, secretKey, marketCode, capital):
 						## 자동매매 시작 후, 24시간이 지나면 break
 						if (start_time > end_time):
 								break
-						time.sleep(10)
+						time.sleep(3)
 				except Exception as x:
 							print(x)
 
 							
 
+# autobot("KRW-XRP", 11000)
