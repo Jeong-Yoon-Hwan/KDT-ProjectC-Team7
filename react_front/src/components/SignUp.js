@@ -32,6 +32,10 @@ const SinUpBox = styled.div`
       border-radius:2px;
       font-weight:bold;
       margin-bottom:22px;
+      cursor: pointer;
+      :hover {
+        background-color: gray;
+      }
     }
 `;
 
@@ -70,7 +74,7 @@ const SignUp = () =>{
       swal("회원가입 성공","회원가입이 완료되었습니다 로그인 해주세요","success").then( ()=>{location.href="http://localhost:8000/"})
     }).catch((error)=>{
       console.log(error);
-      swal("회원가입 실패","회원가입에 실패했습니다 입력정보를 다시 확인해주세요","warning").then(()=>{
+      swal("회원가입 실패",`${error.response.data.message}`,"warning").then(()=>{
       })
     })
   }
