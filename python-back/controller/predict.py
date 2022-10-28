@@ -119,23 +119,23 @@ def machineLearn():
     result = pd.merge(predict, actual, how='outer', on='count')
     result = result.to_json(orient='values',indent=4)
     # print(result)
-    return result
+    # return result
 
 
     # print(predict)
     # print(actual)
     # print(result)
 
-    # plt.figure(figsize=(10,6)) #plotting
-    # plt.axvline(x=1573, c='r', linestyle='--') 
-    # plt.axvline(x=1845, c='r', linestyle='-.')
-    # plt.plot(dataY_plot, label='Actuall Data') 
-    # plt.plot(data_predict, label='Predicted Data') 
-    # plt.title('Bitcoin Prediction')
-    # plt.legend()
-    # plt.show() 
+    plt.figure(figsize=(10,6)) #plotting
+    plt.axvline(x=1573, c='r', linestyle='--') 
+    plt.axvline(x=1845, c='r', linestyle='-.')
+    plt.plot(dataY_plot, label='Actuall Data') 
+    plt.plot(data_predict, label='Predicted Data') 
+    plt.title('Bitcoin Prediction')
+    plt.legend()
+    plt.show() 
 
-# machineLearn()
+machineLearn()
 
 
     # import json as JSON
