@@ -44,7 +44,7 @@ function UserUpdate({ setModalOpen }) {
         swal("회원정보 수정완료",`${localStorage.getItem("nickname")} 님의 회원정보가 수정되었습니다. 다시 로그인해주세요`,"success").then(()=>{
           console.log(response);
           localStorage.clear();
-          location.reload();
+          location.href="http://localhost:8000/";
           setModalOpen(false);
         });
         
