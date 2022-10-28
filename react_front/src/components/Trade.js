@@ -34,10 +34,11 @@ const Trade = () =>{
   const [CoinName,setCoinName] = useState("");
   const coinHandle = (e) =>{setCoinName(e.target.value)}
 
+  
   const [volume,setVolumn] = useState("");
   const volumeHandle = (e) => {setVolumn(e.target.value);}
 
-
+  
   //코인명 입력시 coinCheck함수 실행시켜서 마켓코드를얻음
   useEffect(()=>{
     coinCheck();
@@ -99,7 +100,7 @@ const Trade = () =>{
   const sellOrder = () =>{
     axios.post("http://localhost:5959/sell_order",
       {
-        accessKey : localStorage.getItem("accessKye"),
+        accessKey : localStorage.getItem("accessKey"),
         secretKey : localStorage.getItem("secretKey"),
         marketCode : localStorage.getItem("coinName"),
         volume : volume,
@@ -117,7 +118,9 @@ const Trade = () =>{
         if (willDelete) {
           swal("매도요청이 완료되었습니다.", {
             icon: "success",
-          }).then(()=>{location.reload();});
+          }).then(()=>{
+            //location.reload();
+          });
         } else {
           swal("취소되었습니다.");
         }
