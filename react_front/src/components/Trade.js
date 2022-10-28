@@ -107,25 +107,9 @@ const Trade = () =>{
       }
     ).then((res)=>{
       console.log(res)
-      
-      swal({
-        text: "입력하신 정보로 매도 하시겠습니까?",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true,
-      })
-      .then((willDelete) => {
-        if (willDelete) {
-          swal("매도요청이 완료되었습니다.", {
-            icon: "success",
-          }).then(()=>{
-            //location.reload();
-          });
-        } else {
-          swal("취소되었습니다.");
-        }
+      swal("매도완료","매도요청이 완료되었습니다.","success").then(()=>{
+        location.reload();
       });
-
     }).catch((err)=>{
       console.log(err)
     })
