@@ -64,15 +64,15 @@ def cancel_order():
    trade.cancel_order(accessKey, secretKey, uuid)
    return jsonify({'취소되었습니다.'})
 
-@app.route('/autobot', methods=['POST'])
-def autobot():
-   data = request.get_json()
-   accessKey = data['accessKey']
-   secretKey = data['secretKey']
-   marketCode = data['marketCode']
-   capital = data['capital']
-   autobots.autobot(accessKey, secretKey, marketCode, capital)
-   return jsonify({'자동 매매 실행중'})
+# @app.route('/autobot', methods=['POST'])
+# def autobot():
+#    data = request.get_json()
+#    accessKey = data['accessKey']
+#    secretKey = data['secretKey']
+#    marketCode = data['marketCode']
+#    capital = data['capital']
+#    autobots.autobot(accessKey, secretKey, marketCode, capital)
+#    return jsonify({'자동 매매 실행중'})
    
 @app.route('/', methods=['GET'])
 def hello():
