@@ -252,7 +252,7 @@ const MainBox = styled.div`
     position:relative;
     width: inherit;
     height:calc(100% - 50px);
-    background-color:gray;
+    background-color:lightgray;
     display:flex;
     flex-direction:column;
     justify-content:end;

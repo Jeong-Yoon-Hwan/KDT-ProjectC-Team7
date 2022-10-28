@@ -27,7 +27,7 @@ const messageStyle = (main,chat,name,time,repotimeBox,typeCompare,compareValue) 
   time.style.fontWeight="bold";
   time.style.fontSize="12px";
   time.style.paddingTop="1px";
-  time.style.color="#f1f1f1"
+  time.style.color="gray"
 
   name.style.padding="5px";  
   name.style.fontSize="13px";
