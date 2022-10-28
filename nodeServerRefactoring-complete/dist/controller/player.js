@@ -12,7 +12,7 @@ import path from 'path';
 const currentDir = path.resolve();
 export function playerLoad(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        return res.sendFile(currentDir + '/client/player.html');
+        return res.sendFile(currentDir + '/dist/client/player.html');
     });
 }
 export function videoFile(req, res) {
@@ -21,7 +21,7 @@ export function videoFile(req, res) {
         if (!range) {
             res.status(400).json({ message: '영상을 재생할 수 없습니다' });
         }
-        const videoPath = currentDir + '/video/ppap.mp4';
+        const videoPath = currentDir + '/dist/video/ppap.mp4';
         const videoSize = fs.statSync(videoPath).size;
         const chunk = 3 * 1024 * 1024; // 3메가씩 스트리밍
         const start = parseInt(range.replace(/\D/g, '')); // range 에서 bytes= 를 삭제

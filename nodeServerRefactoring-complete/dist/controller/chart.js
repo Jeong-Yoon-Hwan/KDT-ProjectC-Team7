@@ -11,7 +11,7 @@ import path from 'path';
 const currentDir = path.resolve();
 export function upbitChart(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        return res.sendFile(currentDir + '/client/coinChart.html');
+        return res.sendFile(currentDir + '/dist/client/coinChart.html');
     });
 }
 //# sourceMappingURL=chart.js.map

@@ -5,7 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 const currentDir = path.resolve();
 
 export async function playerLoad(req: Request, res: Response) {
-  return res.sendFile(currentDir + '/client/player.html');
+  return res.sendFile(currentDir + '/dist/client/player.html');
 }
 
 export async function videoFile(req: Request, res: Response) {
@@ -14,7 +14,7 @@ export async function videoFile(req: Request, res: Response) {
     res.status(400).json({ message: '영상을 재생할 수 없습니다' });
   }
 
-  const videoPath = currentDir + '/video/ppap.mp4';
+  const videoPath = currentDir + '/dist/video/ppap.mp4';
   const videoSize = fs.statSync(videoPath).size;
   const chunk = 3 * 1024 * 1024; // 3메가씩 스트리밍
   const start = parseInt(range.replace(/\D/g, '')); // range 에서 bytes= 를 삭제

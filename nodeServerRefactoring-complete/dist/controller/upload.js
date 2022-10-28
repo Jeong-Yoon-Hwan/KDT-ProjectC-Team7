@@ -21,7 +21,7 @@ fs.mkdir(uploadDir, (err) => {
 const currentDir = path.resolve();
 export function upLoadClient(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        return res.sendFile(currentDir + '/client/upload.html');
+        return res.sendFile(currentDir + '/dist/client/upload.html');
     });
 }
 export function fileList(req, res) {

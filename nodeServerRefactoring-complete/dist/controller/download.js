@@ -11,12 +11,12 @@ import path from 'path';
 const currentDir = path.resolve();
 export function autobot(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        return res.sendFile(currentDir + '/download/botDown.py');
+        return res.sendFile(currentDir + '/dist/download/botDown.py');
     });
 }
 export function downPage(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        return res.sendFile(currentDir + '/client/download.html');
+        return res.sendFile(currentDir + '/dist/client/download.html');
     });
 }
 //# sourceMappingURL=download.js.map
