@@ -32,7 +32,7 @@ const UserDelete = ({setUserDeleteOpen}) =>{
         console.log(response);
         setUserDeleteOpen(false);
         localStorage.clear();
-        location.reload();
+        location.href="http://localhost:8000/"
       })
       
     }).catch((error)=>{
