@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <style>
+    #autobot button {
+      background: #222;
+      font-size: 5vw;
+      width: 70vw;
+      height: 10vw;
+      color: #fff;
+      cursor: pointer;
+      padding: 2px 16px;
+      line-height: 20px;
+      border-radius: 30px;
+      border: none;
+    }
+    #autobot button:hover {
+      box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+    }
+  </style>
+  <body>
+    <div id="autobot">
+      <button type="button" id="btn" onclick="download()">
+        자동매매 프로그램 받기
+      </button>
+    </div>
+    <script type="text/javascript">
+      function download() {
+        axios
+          .get('http://127.0.0.1:5858/download/autobot', {
+            responseType: 'blob',
+          })
+          .then((res) => {
+            const blob = new Blob([res.data]);
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.style.display = 'none';
+            link.download = 'autoBot.py';
+            document.body.appendChild(link);
+            link.click();
+          });
+      }
+    </script>
+  </body>
+</html>
