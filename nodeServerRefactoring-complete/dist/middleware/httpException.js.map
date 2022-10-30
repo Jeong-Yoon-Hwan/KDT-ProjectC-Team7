@@ -1,1 +1,0 @@
-{"version":3,"file":"httpException.js","sourceRoot":"","sources":["../../src/middleware/httpException.ts"],"names":[],"mappings":"AAAA,MAAM,aAAc,SAAQ,KAAK;IAG/B,YAAY,MAAc,EAAE,OAAe;QACzC,KAAK,CAAC,OAAO,CAAC,CAAC;QACf,IAAI,CAAC,MAAM,GAAG,MAAM,CAAC;QACrB,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IACzB,CAAC;CACF;AACD,eAAe,aAAa,CAAC"}
