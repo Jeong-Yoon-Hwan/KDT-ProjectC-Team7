@@ -6,7 +6,6 @@ import Chart from '../pages/Chart';
 import News from '../pages/News.js';
 import Trading from '../pages/Trading.js';
 import Info from '../pages/Info.js';
-import Board from '../pages/board.js';
 import Video from '../pages/Video.js';
 import Upload from '../pages/upload.js';
 import InfoKey from '../pages/InfoKey.js';
@@ -35,7 +34,6 @@ const Main = (props) => {
             <Route path="/news" element={<News/>}></Route>
             <Route path="/trading" element={<Trading/>}></Route>
             <Route path="/info" element={<Info/>}></Route>
-            <Route path="/board" element={<Board/>}></Route>
             <Route path="/video" element={<Video/>}></Route>
             <Route path="/upload" element={<Upload/>}></Route>
             <Route path='/infokey' element={<InfoKey/>}></Route>
