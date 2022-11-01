@@ -26,7 +26,7 @@ const Logo = () =>{
   }
     return( 
       <LogoBox>
-        <h1 className="logo-font">Happy Bot & Chat</h1>
+        <h1 className="logo-font">Happy Bot & talk</h1>
         {localStorage.getItem("token") ? (
           <Button color="none">{nickname}님
           <ul>
