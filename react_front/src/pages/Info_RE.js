@@ -49,8 +49,8 @@ currentList : [] //!현재가 목록
 
 //* 비동기 통신이 끝나고 난후 실행하기 위해서 setTimeout 사용
 setTimeout(()=>{
-console.log("--가상화폐 전체 자산정보")
-console.log(assetArr)
+//*console.log("--가상화폐 전체 자산정보")
+//*console.log(assetArr)
 
 init.KRW = assetArr[0];
 
@@ -59,27 +59,27 @@ for(let i=1;i<assetArr.length;i++){
   init.AssetList.push(assetArr[i])
 }
 
-console.log("매수가격") //? 매수가격을 변수에 담았음.
+//*console.log("매수가격") //? 매수가격을 변수에 담았음.
 init.AssetList.forEach(item=>{
   init.buyList.push(calculation.multiply(item.avg_buy_price,item.balance))
 })
 console.log(init.buyList);
 
-console.log("총 매수가격") //? 총 매수가격을 변수에 담음
+//*console.log("총 매수가격") //? 총 매수가격을 변수에 담음
 init.totalBuy = Math.ceil(calculation.arraySum(init.buyList))
 console.log(init.totalBuy)
 
-console.log("총 보유자산") //? 총 보유자산(보유가상화폐+KRW보유)을 변수에 담음
+//*console.log("총 보유자산") //? 총 보유자산(보유가상화폐+KRW보유)을 변수에 담음
 init.totalAsset = Math.ceil(init.totalBuy + parseInt(assetArr[0].balance))
 console.log(init.totalAsset)
 
-console.log("마켓코드") //? 마켓코드를 배열로 변수에 담음.
+//*console.log("마켓코드") //? 마켓코드를 배열로 변수에 담음.
 init.marketCode = init.AssetList.map((item)=>{
   return "KRW-"+item.currency;
 })
-console.log(init.marketCode)
+//*console.log(init.marketCode)
 
-console.log("현재가구하기") //? currentPrice 함수에 마켓코드를 넣고 현재가를 구해서 담음
+//*console.log("현재가구하기") //? currentPrice 함수에 마켓코드를 넣고 현재가를 구해서 담음
 currentPrice(init.marketCode)
 
 //! 현재가 구하는 함수가 비동기라서 관련 데이터식은 1초뒤에 실행하도록 함
@@ -92,23 +92,23 @@ currentPrice(init.marketCode)
 
       console.log(init.currentList)
 
-      console.log("평가금액 리스트 ")  //? 평가금액 리스트를 담음
+      //*console.log("평가금액 리스트 ")  //? 평가금액 리스트를 담음
       for(let i=0;i<init.AssetList.length;i++){
         init.trade_price.push(Math.ceil(calculation.multiply(init.AssetList[i].balance,init.currentList[i])))      
       }
-      console.log(init.trade_price)
+     //* console.log(init.trade_price)
 
-      console.log("총 평가금액")
+     //* console.log("총 평가금액")
       init.total_trade_price = calculation.arraySum(init.trade_price)
-      console.log(init.total_trade_price)
+      //*console.log(init.total_trade_price)
 
-      console.log("총평가 손익 구하기(총평가금액 X 총 매수금액)")
+      //*console.log("총평가 손익 구하기(총평가금액 X 총 매수금액)")
       init.total_loss = (init.total_trade_price - init.totalBuy)
-      console.log(init.total_loss)
+      //*console.log(init.total_loss)
 
-      console.log("수익률 구하기 (총평가 손익 / 총 매수금액") 
+      //*console.log("수익률 구하기 (총평가 손익 / 총 매수금액") 
       init.revenue = calculation.percent(init.total_loss,init.totalBuy)
-      console.log(init.revenue)
+      //*console.log(init.revenue)
       localStorage.setItem("revenue",init.revenue)
 
      
@@ -122,7 +122,7 @@ currentPrice(init.marketCode)
           parseInt(init.trade_price[i])-parseInt(init.buyList[i])
         )
         infoArr.push(info)
-        console.log(infoArr)
+        //*console.log(infoArr)
       }
 
     },1000)
