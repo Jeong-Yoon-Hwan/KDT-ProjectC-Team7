@@ -16,15 +16,15 @@ export async function findNick(req, res) {
 }
 
 export async function inspect(req, res, next) {
-  const yaho = await userDb.findNickname(req.body.nickname);
-  if (yaho) {
-    res.status(200).json({
-      nickname: yaho.nickname,
-      token: req.headers['authorization'].split(' ')[1],
-    });
-  } else {
-    return res.status(404).json({ message: '찾을 수 없습니다' });
-  }
+  const getToken = req.headers['authorization'];
+  const token = getToken.split(' ')[1];
+  jwt.verify(token, config.jwt.secretKey, async (error, decode) => {
+    if (error) {
+      return res.status(401).json({ message: '유효한 토큰이 아닙니다' });
+    } else {
+      return res.status(200).json({ message: decode.nickname });
+    }
+  });
 }
 
 function createToken(nickname) {

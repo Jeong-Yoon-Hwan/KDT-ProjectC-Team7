@@ -14,8 +14,6 @@ export async function isAuth(req, res, next) {
   jwt.verify(token, config.jwt.secretKey, async (error, decode) => {
     if (error) {
       return res.status(401).json({ message: '유효한 토큰이 아닙니다' });
-    } else {
-      return res.status(200).json({ message: decode.nickname });
     }
     next();
   });
