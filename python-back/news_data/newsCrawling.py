@@ -17,7 +17,7 @@ def newsAdd():
 # main
     # if __name__ == "__main__":
   # 경로 입 사 목록 링크
-    inputURL = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=259"
+    inputURL = "https://news.naver.com/main/list.naver?mode=LS2D&mid=shm&sid1=101&sid2=262"
     #get 요청 : 헤더값을 같이 보내줘야함
     response = requests.get(inputURL, headers=headers)
     beautifulSoup = BeautifulSoup(response.content, "html.parser")
