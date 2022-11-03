@@ -20,7 +20,7 @@ export function isAuth(req, res, next) {
             return res.status(401).json({ message: '검증할 수 없습니다' });
         }
         const token = getToken.split(' ')[1];
-        jwt.verify(token, config.jwt.secretKey, (error) => __awaiter(this, void 0, void 0, function* () {
+        jwt.verify(token, config.jwt.secretKey, (error, decode) => __awaiter(this, void 0, void 0, function* () {
             if (error) {
                 return res.status(401).json({ message: '유효한 토큰이 아닙니다' });
             }
