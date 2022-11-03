@@ -12,9 +12,11 @@ export async function isAuth(req: Request, res: Response, next: NextFunction) {
     return res.status(401).json({ message: '검증할 수 없습니다' });
   }
   const token = getToken.split(' ')[1];
-  jwt.verify(token, config.jwt.secretKey, async (error: Error) => {
+  jwt.verify(token, config.jwt.secretKey, async (error: Error, decode: any) => {
     if (error) {
       return res.status(401).json({ message: '유효한 토큰이 아닙니다' });
+    } else {
+      return res.status(200).json({ message: decode.nickname });
     }
     next();
   });
