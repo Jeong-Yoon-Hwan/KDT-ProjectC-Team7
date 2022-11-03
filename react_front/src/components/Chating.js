@@ -1,4 +1,4 @@
-import React,{useRef,useState} from "react"
+import React,{useEffect, useRef,useState} from "react"
 import styled from "styled-components"
 import axios from "axios"
 import useInput from "../hooks/useInput";
@@ -8,6 +8,9 @@ import alarmStyle from "../common/alarmMessageStyle";
 const ws = new WebSocket("ws://localhost:3001");
 
 const Chating = () => {
+
+  //const [nickname,setNickname] = useState("");
+  
 
   const date = new Date();
     const hours = date.getHours();
@@ -29,11 +32,23 @@ const Chating = () => {
   
 
   window.onload = () =>{
-    reloadMessage();
+    axios.post("http://localhost:5858/auth/inspect",
+      {nickName:""},
+      {
+        headers :{
+          Authorization : `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    ).then((res)=>{
+      reloadMessage(res.data.message);
+    }).catch((err)=>{
+      console.log(err)
+    })
+    
   }
 
   //* 새로고침 했을때 전체 메시지 데이터 받아서 출력=============
-  function reloadMessage(){
+  function reloadMessage(nickName){
     let text = []; //? 메세지 내용
     let nickname = []; //? 유저닉네임
     let writeTime = []; //? 보낸시간
@@ -46,8 +61,6 @@ const Chating = () => {
         }
       }
     ).then((res)=>{
-      //console.log(res.data)
-      //let value = res.data;
       
         for(let i=0;i<res.data.length;i++){
           text.push(res.data[i].text)
@@ -72,7 +85,7 @@ const Chating = () => {
           let repotimeBox = document.createElement("sapn");
           repotimeBox.textContent = repotime[i];
           
-          messageStyle(chatBox,chat,nameBox,timeBox,repotimeBox,nickname[i],localStorage.getItem('nickname'))
+          messageStyle(chatBox,chat,nameBox,timeBox,repotimeBox,nickname[i],nickName)
           
           chat.appendChild(message)
           chatBox.appendChild(chat);
@@ -90,52 +103,62 @@ const Chating = () => {
 
   //* 서버에서 보낸 메세지 받기==================================================
   function receiveMessage(event){
+    axios.post("http://localhost:5858/auth/inspect",
+      {nickName:""},
+      {
+        headers :{
+          Authorization : `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    ).then((res)=>{
+      console.log(res)
+          //채팅 내용과 닉네임이 들어갈 박스
+        const chatBox = document.createElement("div")
+        // 채팅이 입력될 박스를 생성
+        const chat = document.createElement("div")
+        //메세지가 입력될요소를 생성
+        const msg = JSON.parse(event.data); //msg에 data를 JSON객체로 받아옴.
+        const message = document.createTextNode(msg.text)
+
+        //* 이름이 표시될 박스
+        const nameBox = document.createElement("div")
+        nameBox.textContent = msg.nickname;
+
+        chatBox.appendChild(nameBox)
+
+        //* 시간표시
+        const timeBox = document.createElement("div")
+        timeBox.textContent =msg.time;
+        const repotime = document.createElement('div');
+
+        //* 메세지 타입이 "message" 일때
+        if(msg.type==="message"){
+          //* 채팅박스 스타일 지정 >> 일단 함수로 만들어놨음..
+          //messageStyle(chat,msg.nickname,localStorage.getItem("nickname"));
+          messageStyle(chatBox,chat,nameBox,timeBox,repotime,msg.nickname,res.data.message);
+        }else {
+          alarmStyle(chat);
+        }
+        //메세지를 채팅박스에 추가
+        chat.appendChild(message);
+
+        //채팅박스에 chat 추가함
+        MessageBox.current.appendChild(chat)
+        chatBox.appendChild(chat);
+
+        //* 시간을 채팅박스에 추가
+        chatBox.appendChild(timeBox)
+
+        //채팅박스에 메세지를 추가함
+        MessageBox.current.appendChild(chatBox)
+
+
+    }).catch((err)=>{
+      console.log(err)
+    })
     
     
-    //채팅 내용과 닉네임이 들어갈 박스
-    const chatBox = document.createElement("div")
 
-    // 채팅이 입력될 박스를 생성
-    const chat = document.createElement("div")
-    //메세지가 입력될요소를 생성
-    const msg = JSON.parse(event.data); //msg에 data를 JSON객체로 받아옴.
-    const message = document.createTextNode(msg.text)
-
-    //* 이름이 표시될 박스
-    const nameBox = document.createElement("div")
-    nameBox.textContent = msg.nickname;
-
-    chatBox.appendChild(nameBox)
-
-    //* 시간표시
-    const timeBox = document.createElement("div")
-    timeBox.textContent =msg.time;
-    const repotime = document.createElement('div');
-
-    //* 메세지 타입이 "message" 일때
-    if(msg.type==="message"){
-      //* 채팅박스 스타일 지정 >> 일단 함수로 만들어놨음..
-      //messageStyle(chat,msg.nickname,localStorage.getItem("nickname"));
-      messageStyle(chatBox,chat,nameBox,timeBox,repotime,msg.nickname,localStorage.getItem("nickname"));
-    }else {
-      alarmStyle(chat);
-    }
-
-    //메세지를 채팅박스에 추가
-    chat.appendChild(message);
-
-    //채팅박스에 chat 추가함
-    MessageBox.current.appendChild(chat)
-    chatBox.appendChild(chat);
-
-    //* 시간을 채팅박스에 추가
-    chatBox.appendChild(timeBox)
-
-    //채팅박스에 메세지를 추가함
-    MessageBox.current.appendChild(chatBox)
-
-    
-    
   }
   
   ws.onmessage = receiveMessage //서버에 데이터가 전송되었을때 함수 실행
@@ -144,10 +167,22 @@ const Chating = () => {
 
   //*=========================메시지 받기 끝==========================================
 
-
   //?====================보내기 버튼 눌렀을때 채팅내용 담은 박스 생성====================================
   const onSubmit = () =>{  
-    
+    let nickName = "";
+    axios.post("http://localhost:5858/auth/inspect",
+      {nickname:""},
+      {
+        headers :{
+          Authorization : `Bearer ${localStorage.getItem("token")}`
+        }
+      }
+    ).then((res)=>{
+      nickName = res.data.message;
+      console.log(nickName)
+      submitDB(nickName)
+      submitWs(nickName)
+    }).catch((err)=>{console.log(err)})
     
 
     if(chat.value===""){
@@ -155,12 +190,13 @@ const Chating = () => {
       clearInput();
       return false;
     }
-    //인풋에 입력한 값을 message로 전송
-    const message = chat.value;
-
-    axios.post("http://localhost:5858/chat",
+    
+    
+    function submitDB(nickName){
+      axios.post("http://localhost:5858/chat",
       {
-        nickname : localStorage.getItem("nickname"),
+        //nickname : localStorage.getItem("nickname"),  
+        nickname:nickName,
         text : chat.value        
       },
       {
@@ -168,25 +204,32 @@ const Chating = () => {
           Authorization : `Bearer ${localStorage.getItem("token")}`
         }
       }
-    ).then((response)=>{
-      //console.log(response)
-      
-      receiveMessage
-    }).catch((error)=>{
-      console.log(error)
-    })
+      ).then((response)=>{
+        receiveMessage
+       
+      }).catch((error)=>{
+        console.log(error)
+      })
 
-    //* 입력한 메시지 를 객제로 변환
-    const msg = {
-      type:"message",
-      text:message,
-      nickname: localStorage.getItem("nickname"),
-      time : time
+
     }
+    //인풋에 입력한 값을 message로 전송
 
-    //* 객체형태로 웹소켓에 전송
+    function submitWs(nickName){
+      const message = chat.value;
+
+      //* 입력한 메시지 를 객제로 변환
+      const msg = {
+        type:"message",
+        text:message,
+        //nickname: localStorage.getItem("nickname"),
+        nickname: nickName,
+        time : time
+      }
+      //* 객체형태로 웹소켓에 전송
+        ws.send(JSON.stringify(msg));
+    }
     
-      ws.send(JSON.stringify(msg));
     
     const inputValue = document.getElementById("chat");
     
